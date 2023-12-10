@@ -1,7 +1,7 @@
 # Machine Learning (Python)
-# Tabla de contenidos
+## Tabla de contenidos
 - [Machine Learning (Python)](#machine-learning-python)
-- [Tabla de contenidos](#tabla-de-contenidos)
+  - [Tabla de contenidos](#tabla-de-contenidos)
   - [**Instalación**](#instalación)
     - [Windows](#windows)
       - [**Paso 1: Descargar Python**](#paso-1-descargar-python)
