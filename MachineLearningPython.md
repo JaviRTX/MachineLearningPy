@@ -20,6 +20,7 @@
       - [Machinelearningmastery](#machinelearningmastery)
       - [Scipy](#scipy)
       - [FreeCodeCamp](#freecodecamp)
+      - [ChatGPT](#chatgpt)
 ## **Instalación**
 ### Windows
 
@@ -80,3 +81,4 @@
 #### [Machinelearningmastery](https://machinelearningmastery.com/machine-learning-in-python-step-by-step/)
 #### [Scipy](https://scipy.org/)
 #### [FreeCodeCamp](https://www.freecodecamp.org/espanol/learn/machine-learning-with-python/)
+#### [ChatGPT](https://chat.openai.com/)
