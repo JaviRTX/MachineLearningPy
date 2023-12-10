@@ -15,11 +15,11 @@
       - [**Paso 4: Verificar la Instalación de pip**](#paso-4-verificar-la-instalación-de-pip)
       - [**Paso 5: Instalar Paquetes para Machine Learning**](#paso-5-instalar-paquetes-para-machine-learning)
   - [Bibliografía](#bibliografía)
-      - [LINK - https://www.kaggle.com/learn](#link---httpswwwkagglecomlearn)
-      - [LINK - https://www.w3schools.com/python/python\_ml\_getting\_started.asp](#link---httpswwww3schoolscompythonpython_ml_getting_startedasp)
-      - [LINK - https://machinelearningmastery.com/machine-learning-in-python-step-by-step/](#link---httpsmachinelearningmasterycommachine-learning-in-python-step-by-step)
-      - [LINK - https://scipy.org/](#link---httpsscipyorg)
-      - [LINK - https://www.freecodecamp.org/espanol/learn/machine-learning-with-python/](#link---httpswwwfreecodecamporgespanollearnmachine-learning-with-python)
+      - [Kaggle](#kaggle)
+      - [W3Schools](#w3schools)
+      - [Machinelearningmastery](#machinelearningmastery)
+      - [Scipy](#scipy)
+      - [FreeCodeCamp](#freecodecamp)
 ## **Instalación**
 ### Windows
 
@@ -75,8 +75,8 @@
   ```
 
 ## Bibliografía
-#### LINK - https://www.kaggle.com/learn
-#### LINK - https://www.w3schools.com/python/python_ml_getting_started.asp
-#### LINK - https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
-#### LINK - https://scipy.org/
-#### LINK - https://www.freecodecamp.org/espanol/learn/machine-learning-with-python/
+#### [Kaggle](https://www.kaggle.com/learn)
+#### [W3Schools](https://www.w3schools.com/python/python_ml_getting_started.asp)
+#### [Machinelearningmastery](https://machinelearningmastery.com/machine-learning-in-python-step-by-step/)
+#### [Scipy](https://scipy.org/)
+#### [FreeCodeCamp](https://www.freecodecamp.org/espanol/learn/machine-learning-with-python/)
