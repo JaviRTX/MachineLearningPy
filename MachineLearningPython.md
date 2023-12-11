@@ -28,6 +28,18 @@
       - [Aprendizaje por Refuerzo](#aprendizaje-por-refuerzo)
         - [Caso Práctico](#caso-práctico-2)
     - [Fundamentos de Python para Machine Learning](#fundamentos-de-python-para-machine-learning)
+      - [Introducción a Python](#introducción-a-python)
+      - [Ventajas para el ML:](#ventajas-para-el-ml)
+    - [Bibliotecas Esenciales: NumPy, Pandas](#bibliotecas-esenciales-numpy-pandas)
+      - [NumPy](#numpy)
+        - [Ejemplo de Uso:](#ejemplo-de-uso)
+      - [Pandas](#pandas)
+        - [Ejemplo de Uso:](#ejemplo-de-uso-1)
+    - [Visualización de Datos: Matplotlib, Seaborn](#visualización-de-datos-matplotlib-seaborn)
+      - [Matplotlib](#matplotlib)
+        - [Ejemplo de Gráfico:](#ejemplo-de-gráfico)
+      - [Seaborn](#seaborn)
+        - [Ejemplo de Gráfico:](#ejemplo-de-gráfico-1)
   - [Parte II: Aprendizaje Supervisado](#parte-ii-aprendizaje-supervisado)
     - [Regresión](#regresión)
     - [Clasificación](#clasificación)
@@ -165,9 +177,85 @@ El Aprendizaje por Refuerzo es un tipo de ML donde un agente aprende a tomar dec
 
 ### Fundamentos de Python para Machine Learning
 
-- Introducción a Python
-- Bibliotecas Esenciales: NumPy, Pandas
-- Visualización de Datos: Matplotlib, Seaborn
+Python se ha convertido en uno de los lenguajes de programación más populares en el campo del Machine Learning y la Ciencia de Datos. Su simplicidad, legibilidad y una amplia gama de bibliotecas hacen de Python una herramienta esencial para cualquier profesional del ML.
+
+#### Introducción a Python
+
+Python es un lenguaje de programación de alto nivel, interpretado, con un enfoque en la simplicidad y la legibilidad del código. Es ampliamente utilizado por su eficiencia y su extensa librería estándar, además de la gran comunidad que lo respalda.
+
+#### Ventajas para el ML:
+
+- **Sintaxis Clara y Concisa**: Facilita la escritura y lectura de código complejo.
+- **Gran Comunidad**: Amplio soporte y recursos de aprendizaje.
+- **Portabilidad y Extensibilidad**: Compatible con diversas plataformas y lenguajes.
+
+### Bibliotecas Esenciales: NumPy, Pandas
+
+#### NumPy
+
+NumPy es una biblioteca fundamental para la computación científica en Python. Proporciona soporte para arrays y matrices grandes y multidimensionales, junto con una colección de funciones matemáticas para operar en estos arrays.
+
+##### Ejemplo de Uso:
+
+```python
+import numpy as np
+
+# Crear un array NumPy
+array = np.array([1, 2, 3, 4, 5])
+print(array)
+```
+
+#### Pandas
+
+Pandas es una biblioteca que proporciona estructuras de datos y herramientas de análisis de datos de alto rendimiento y fácil de usar. Es ideal para trabajar con datos tabulares o heterogéneos.
+
+##### Ejemplo de Uso:
+
+```python
+import pandas as pd
+
+# Crear un DataFrame
+data = {'Name': ['John', 'Anna'], 'Age': [28, 22]}
+df = pd.DataFrame(data)
+print(df)
+```
+
+### Visualización de Datos: Matplotlib, Seaborn
+
+La visualización es una parte crucial en el análisis de datos y el Machine Learning, ya que permite comprender mejor los datos y los resultados de los modelos.
+
+#### Matplotlib
+
+Matplotlib es una biblioteca de gráficos 2D en Python que permite crear figuras y gráficos de alta calidad.
+
+##### Ejemplo de Gráfico:
+
+```python
+import matplotlib.pyplot as plt
+
+plt.plot([1, 2, 3, 4])
+plt.ylabel('Algunos números')
+plt.show()
+```
+
+![Ejemplo de Gráfico con Matplotlib](/Img/grafico_simple_matplotlib.png)
+
+#### Seaborn
+
+Seaborn es una biblioteca de visualización de datos en Python basada en Matplotlib. Ofrece una interfaz de alto nivel para dibujar gráficos estadísticos atractivos y informativos.
+
+##### Ejemplo de Gráfico:
+
+```python
+import seaborn as sns
+
+# Datos de ejemplo
+tips = sns.load_dataset("tips")
+sns.relplot(x="total_bill", y="tip", data=tips);
+```
+
+![Ejemplo de Gráfico con Seaborn](/Img/grafico_simple_seaborn.png)
+
 
 ## Parte II: Aprendizaje Supervisado
 
