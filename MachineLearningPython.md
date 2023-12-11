@@ -175,6 +175,8 @@ El Aprendizaje por Refuerzo es un tipo de ML donde un agente aprende a tomar dec
 
 ![Ejemplo de Aprendizaje por Refuerzo en Juegos](https://rubenlopezg.files.wordpress.com/2015/05/direct_reward1.png)
 
+[Tabla de contenidos](#tabla-de-contenidos)
+
 ### Fundamentos de Python para Machine Learning
 
 Python se ha convertido en uno de los lenguajes de programación más populares en el campo del Machine Learning y la Ciencia de Datos. Su simplicidad, legibilidad y una amplia gama de bibliotecas hacen de Python una herramienta esencial para cualquier profesional del ML.
@@ -258,7 +260,7 @@ sns.relplot(x="total_bill", y="tip", data=tips);
 
 
 ## Parte II: Aprendizaje Supervisado
-
+[Tabla de contenidos](#tabla-de-contenidos)
 ### Regresión
 
 - Regresión Lineal
