@@ -261,11 +261,80 @@ sns.relplot(x="total_bill", y="tip", data=tips);
 
 ## Parte II: Aprendizaje Supervisado
 [Tabla de contenidos](#tabla-de-contenidos)
+
+En el aprendizaje supervisado, los algoritmos aprenden de un conjunto de datos etiquetado, buscando predecir la salida para nuevas entradas basándose en el conocimiento adquirido.
+
 ### Regresión
 
+La regresión en aprendizaje supervisado implica predecir valores continuos. Es crucial en muchos campos como la economía, la biología, y la ingeniería.
+
 - Regresión Lineal
+  
+  La Regresión Lineal es fundamental para entender cómo las variables independientes están relacionadas con la variable dependiente.
+
+  Ejemplo: 
+  ```python
+  import numpy as np
+  from sklearn.linear_model import LinearRegression
+
+
+  # Datos de entrenamiento
+  X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
+  y = np.dot(X, np.array([1, 2])) + 3
+
+  # Crear y entrenar el modelo
+  modelo = LinearRegression().fit(X, y)
+
+  # Predecir nuevos valores
+  print(modelo.predict(np.array([[3, 5]])))
+  ```
+
 - Regresión Polinómica
+  
+  La Regresión Polinómica es útil cuando la relación entre las variables independientes y dependientes no es lineal.
+
+  Ejemplo:
+
+  ```python 
+  import numpy as np
+  from sklearn.preprocessing import PolynomialFeatures
+  from sklearn.linear_model import LinearRegression
+
+  # Datos de entrenamiento
+  X = np.array([2, 3, 4]).reshape(-1, 1)
+  y = np.array([3, 5, 7])
+
+  # Transformar datos a una forma polinómica
+  poly = PolynomialFeatures(degree=2)
+  X_poly = poly.fit_transform(X)
+
+  # Crear y entrenar el modelo
+  modelo = LinearRegression().fit(X_poly, y)
+
+  # Predecir nuevos valores
+  print(modelo.predict(poly.fit_transform(np.array([5]).reshape(-1, 1))))
+  ```
+
 - Regresión con Árboles de Decisión
+  
+  Los Árboles de Decisión son versátiles y pueden usarse tanto para clasificación como para regresión.
+
+  ```python
+  from sklearn.tree import DecisionTreeRegressor
+
+  # Datos de entrenamiento
+  X = [[0, 0], [2, 2]]
+  y = [0.5, 2.5]
+
+  # Crear y entrenar el modelo
+  modelo = DecisionTreeRegressor().fit(X, y)
+
+  # Predecir nuevos valores
+  print(modelo.predict([[1, 1]]))
+  ```
+
+
+En cada uno de estos ejemplos, el código en Python ilustra cómo se pueden implementar y entrenar modelos de regresión, utilizando bibliotecas como sklearn, que es estándar en la industria del Machine Learning.
 
 ### Clasificación
 
