@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MachineLearningPython.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="machine-learning-python">Machine Learning (Python)</h1>
+<h2 id="tabla-de-contenidos">Tabla de contenidos</h2>
+<ul>
+<li><a href="#machine-learning-python">Machine Learning (Python)</a>
+<ul>
+<li><a href="#tabla-de-contenidos">Tabla de contenidos</a></li>
+<li><a href="#instalaci%C3%B3n"><strong>Instalación</strong></a>
+<ul>
+<li><a href="#windows">Windows</a>
+<ul>
+<li><a href="#paso-1-descargar-python"><strong>Paso 1: Descargar Python</strong></a></li>
+<li><a href="#paso-2-instalaci%C3%B3n-de-python"><strong>Paso 2: Instalación de Python</strong></a></li>
+<li><a href="#paso-3-verificar-la-instalaci%C3%B3n"><strong>Paso 3: Verificar la Instalación</strong></a></li>
+<li><a href="#paso-4-instalar-paquetes-para-machine-learning"><strong>Paso 4: Instalar Paquetes para Machine Learning</strong></a></li>
+</ul>
+</li>
+<li><a href="#linux-debianubuntu"><strong>Linux (Debian/Ubuntu)</strong></a>
+<ul>
+<li><a href="#paso-1-actualizar-el-sistema"><strong>Paso 1: Actualizar el Sistema</strong></a></li>
+<li><a href="#paso-2-instalaci%C3%B3n-de-python-1"><strong>Paso 2: Instalación de Python</strong></a></li>
+<li><a href="#paso-3-instalar-pip"><strong>Paso 3: Instalar pip</strong></a></li>
+<li><a href="#paso-4-verificar-la-instalaci%C3%B3n-de-pip"><strong>Paso 4: Verificar la Instalación de pip</strong></a></li>
+<li><a href="#paso-5-instalar-paquetes-para-machine-learning"><strong>Paso 5: Instalar Paquetes para Machine Learning</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#parte-i-fundamentos">Parte I: Fundamentos</a>
+<ul>
+<li><a href="#introducci%C3%B3n-al-machine-learning">Introducción al Machine Learning</a>
+<ul>
+<li><a href="#definici%C3%B3n-y-aplicaciones">Definición y Aplicaciones</a></li>
+<li><a href="#aplicaciones-pr%C3%A1cticas">Aplicaciones Prácticas</a></li>
+</ul>
+</li>
+<li><a href="#tipos-de-aprendizaje">Tipos de Aprendizaje</a>
+<ul>
+<li><a href="#aprendizaje-supervisado">Aprendizaje Supervisado</a>
+<ul>
+<li><a href="#caso-pr%C3%A1ctico">Caso Práctico</a></li>
+</ul>
+</li>
+<li><a href="#aprendizaje-no-supervisado">Aprendizaje No Supervisado</a>
+<ul>
+<li><a href="#caso-pr%C3%A1ctico-1">Caso Práctico</a></li>
+</ul>
+</li>
+<li><a href="#aprendizaje-por-refuerzo">Aprendizaje por Refuerzo</a>
+<ul>
+<li><a href="#caso-pr%C3%A1ctico-2">Caso Práctico</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#fundamentos-de-python-para-machine-learning">Fundamentos de Python para Machine Learning</a>
+<ul>
+<li><a href="#introducci%C3%B3n-a-python">Introducción a Python</a></li>
+<li><a href="#ventajas-para-el-ml">Ventajas para el ML:</a></li>
+</ul>
+</li>
+<li><a href="#bibliotecas-esenciales-numpy-pandas">Bibliotecas Esenciales: NumPy, Pandas</a>
+<ul>
+<li><a href="#numpy">NumPy</a>
+<ul>
+<li><a href="#ejemplo-de-uso">Ejemplo de Uso:</a></li>
+</ul>
+</li>
+<li><a href="#pandas">Pandas</a>
+<ul>
+<li><a href="#ejemplo-de-uso-1">Ejemplo de Uso:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#visualizaci%C3%B3n-de-datos-matplotlib-seaborn">Visualización de Datos: Matplotlib, Seaborn</a>
+<ul>
+<li><a href="#matplotlib">Matplotlib</a>
+<ul>
+<li><a href="#ejemplo-de-gr%C3%A1fico">Ejemplo de Gráfico:</a></li>
+</ul>
+</li>
+<li><a href="#seaborn">Seaborn</a>
+<ul>
+<li><a href="#ejemplo-de-gr%C3%A1fico-1">Ejemplo de Gráfico:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#parte-ii-aprendizaje-supervisado">Parte II: Aprendizaje Supervisado</a>
+<ul>
+<li><a href="#regresi%C3%B3n">Regresión</a></li>
+<li><a href="#clasificaci%C3%B3n">Clasificación</a>
+<ul>
+<li><a href="#k-nearest-neighbors-knn">K-Nearest Neighbors (KNN)</a></li>
+<li><a href="#m%C3%A1quinas-de-vectores-de-soporte-svm">Máquinas de Vectores de Soporte (SVM)</a></li>
+<li><a href="#%C3%A1rboles-de-decisi%C3%B3n-y-bosques-aleatorios">Árboles de Decisión y Bosques Aleatorios</a>
+<ul>
+<li><a href="#%C3%A1rboles-de-decisi%C3%B3n">Árboles de Decisión</a></li>
+<li><a href="#bosques-aleatorios">Bosques Aleatorios</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#parte-iii-aprendizaje-no-supervisado">Parte III: Aprendizaje No Supervisado</a>
+<ul>
+<li><a href="#clustering">Clustering</a>
+<ul>
+<li><a href="#k-means">K-Means</a>
+<ul>
+<li><a href="#caracter%C3%ADsticas-del-k-means">Características del K-Means:</a></li>
+<li><a href="#ejemplo-de-c%C3%B3digo-en-python">Ejemplo de Código en Python:</a></li>
+<li><a href="#resultados-y-aplicaciones">Resultados y Aplicaciones:</a></li>
+</ul>
+</li>
+<li><a href="#clustering-jer%C3%A1rquico">Clustering Jerárquico</a>
+<ul>
+<li><a href="#caracter%C3%ADsticas-del-clustering-jer%C3%A1rquico">Características del Clustering Jerárquico:</a></li>
+</ul>
+</li>
+<li><a href="#ejemplo-de-c%C3%B3digo-en-python-1">Ejemplo de Código en Python:</a>
+<ul>
+<li><a href="#aplicaciones-del-clustering-jer%C3%A1rquico">Aplicaciones del Clustering Jerárquico:</a></li>
+</ul>
+</li>
+<li><a href="#clustering-dbscan">Clustering DBSCAN</a></li>
+</ul>
+</li>
+<li><a href="#reducci%C3%B3n-de-dimensionalidad">Reducción de Dimensionalidad</a>
+<ul>
+<li><a href="#an%C3%A1lisis-de-componentes-principales-pca">Análisis de Componentes Principales (PCA)</a></li>
+<li><a href="#t-distributed-stochastic-neighbor-embedding-t-sne">t-Distributed Stochastic Neighbor Embedding (t-SNE)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#parte-iv-aprendizaje-por-refuerzo">Parte IV: Aprendizaje por Refuerzo</a>
+<ul>
+<li><a href="#conceptos-b%C3%A1sicos-de-aprendizaje-por-refuerzo">Conceptos Básicos de Aprendizaje por Refuerzo</a></li>
+<li><a href="#aplicaciones-avanzadas">Aplicaciones Avanzadas</a></li>
+</ul>
+</li>
+<li><a href="#parte-v-t%C3%A9cnicas-avanzadas">Parte V: Técnicas Avanzadas</a>
+<ul>
+<li><a href="#redes-neuronales-y-deep-learning">Redes Neuronales y Deep Learning</a></li>
+<li><a href="#natural-language-processing-nlp-con-python">Natural Language Processing (NLP) con Python</a></li>
+</ul>
+</li>
+<li><a href="#parte-vi-herramientas-y-mejores-pr%C3%A1cticas">Parte VI: Herramientas y Mejores Prácticas</a>
+<ul>
+<li><a href="#evaluaci%C3%B3n-y-ajuste-de-modelos">Evaluación y Ajuste de Modelos</a></li>
+<li><a href="#despliegue-de-modelos-de-machine-learning">Despliegue de Modelos de Machine Learning</a></li>
+</ul>
+</li>
+<li><a href="#parte-vii-estudios-de-caso-y-proyectos">Parte VII: Estudios de Caso y Proyectos</a>
+<ul>
+<li><a href="#proyectos-de-machine-learning">Proyectos de Machine Learning</a></li>
+<li><a href="#%C3%A9tica-y-consideraciones-legales-en-machine-learning">Ética y Consideraciones Legales en Machine Learning</a></li>
+</ul>
+</li>
+<li><a href="#bibliograf%C3%ADa">Bibliografía</a>
+<ul>
+<li><a href="#kaggle">Kaggle</a></li>
+<li><a href="#w3schools">W3Schools</a></li>
+<li><a href="#machinelearningmastery">Machinelearningmastery</a></li>
+<li><a href="#scipy">Scipy</a></li>
+<li><a href="#freecodecamp">FreeCodeCamp</a></li>
+<li><a href="#chatgpt">ChatGPT</a></li>
+<li><a href="#siim">SIIM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="instalaci%C3%B3n"><strong>Instalación</strong></h2>
+<h3 id="windows">Windows</h3>
+<h4 id="paso-1-descargar-python"><strong>Paso 1: Descargar Python</strong></h4>
+<ul>
+<li>Visita la página oficial de Python: <a href="https://www.python.org/">python.org</a>.</li>
+<li>Haz clic en <strong>Downloads</strong> y selecciona la versión para Windows.</li>
+<li>Descarga el instalador ejecutable (<code>.exe</code>) para Windows.</li>
+</ul>
+<h4 id="paso-2-instalaci%C3%B3n-de-python"><strong>Paso 2: Instalación de Python</strong></h4>
+<ul>
+<li>Ejecuta el instalador descargado.</li>
+<li>Asegúrate de marcar la opción <strong>&quot;Add Python to PATH&quot;</strong> al inicio de la instalación.</li>
+<li>Haz clic en <strong>&quot;Install Now&quot;</strong>.</li>
+</ul>
+<h4 id="paso-3-verificar-la-instalaci%C3%B3n"><strong>Paso 3: Verificar la Instalación</strong></h4>
+<ul>
+<li>Abre el <strong>Command Prompt (CMD)</strong> y escribe <code>python --version</code>.</li>
+<li>Deberías ver la versión de Python instalada.</li>
+</ul>
+<h4 id="paso-4-instalar-paquetes-para-machine-learning"><strong>Paso 4: Instalar Paquetes para Machine Learning</strong></h4>
+<ul>
+<li>
+<p>Utiliza el siguiente comando para instalar paquetes comunes de ML:</p>
+<pre class="hljs"><code><div>pip install numpy scipy matplotlib scikit-learn jupyter
+</div></code></pre>
+</li>
+</ul>
+<h3 id="linux-debianubuntu"><strong>Linux (Debian/Ubuntu)</strong></h3>
+<h4 id="paso-1-actualizar-el-sistema"><strong>Paso 1: Actualizar el Sistema</strong></h4>
+<ul>
+<li>Abre la terminal.</li>
+<li>Escribe <code>sudo apt update</code> y luego <code>sudo apt upgrade</code>.</li>
+</ul>
+<h4 id="paso-2-instalaci%C3%B3n-de-python"><strong>Paso 2: Instalación de Python</strong></h4>
+<ul>
+<li>La mayoría de las distribuciones de Linux vienen con Python preinstalado. Para verificar, escribe <code>python3 --version</code>.</li>
+<li>Si no está instalado, usa <code>sudo apt install python3</code>.</li>
+</ul>
+<h4 id="paso-3-instalar-pip"><strong>Paso 3: Instalar pip</strong></h4>
+<ul>
+<li>Usa el comando <code>sudo apt install python3-pip</code>.</li>
+</ul>
+<h4 id="paso-4-verificar-la-instalaci%C3%B3n-de-pip"><strong>Paso 4: Verificar la Instalación de pip</strong></h4>
+<ul>
+<li>Escribe <code>pip3 --version</code> para verificar la instalación.</li>
+</ul>
+<h4 id="paso-5-instalar-paquetes-para-machine-learning"><strong>Paso 5: Instalar Paquetes para Machine Learning</strong></h4>
+<ul>
+<li>
+<p>Utiliza el siguiente comando para instalar paquetes comunes de ML:</p>
+<pre class="hljs"><code><div>pip3 install numpy scipy matplotlib scikit-learn jupyter
+</div></code></pre>
+</li>
+</ul>
+<h2 id="parte-i-fundamentos">Parte I: Fundamentos</h2>
+<p><a href="#tabla-de-contenidos">Tabla de contenidos</a></p>
+<h3 id="introducci%C3%B3n-al-machine-learning">Introducción al Machine Learning</h3>
+<p>El Machine Learning (ML) es una rama fascinante y en constante evolución de la Inteligencia Artificial (IA) que se centra en el desarrollo de algoritmos y modelos que permiten a las computadoras aprender y actuar sin estar explícitamente programadas para tareas específicas. Esta capacidad de aprendizaje automático se logra mediante la identificación de patrones en los datos y la aplicación de estos conocimientos para realizar predicciones o tomar decisiones.</p>
+<h4 id="definici%C3%B3n-y-aplicaciones">Definición y Aplicaciones</h4>
+<p>Machine Learning se define como la capacidad de un sistema para aprender y mejorar a partir de la experiencia sin ser programado explícitamente. Esta área combina elementos de estadística, matemáticas, programación y otras disciplinas para crear modelos que puedan procesar grandes conjuntos de datos y realizar tareas como clasificación, predicción, y reconocimiento de patrones.</p>
+<h4 id="aplicaciones-pr%C3%A1cticas">Aplicaciones Prácticas</h4>
+<ul>
+<li><strong>Salud</strong>: Diagnóstico de enfermedades, análisis de imágenes médicas.</li>
+<li><strong>Finanzas</strong>: Detección de fraudes, asesoramiento financiero automatizado.</li>
+<li><strong>Retail</strong>: Personalización de recomendaciones de productos, análisis de comportamiento del consumidor.</li>
+<li><strong>Automatización y Vehículos Autónomos</strong>: Vehículos que se conducen solos, robots para tareas domésticas.</li>
+</ul>
+<p><img src="Img/SIIM-ISIC Melanoma Classification.png" alt="Ejemplo de Aplicación de ML en Salud"></p>
+<h3 id="tipos-de-aprendizaje">Tipos de Aprendizaje</h3>
+<p>El Machine Learning se clasifica generalmente en tres tipos principales, basados en la naturaleza de la &quot;señal&quot; o &quot;retroalimentación&quot; disponible para el sistema de aprendizaje:</p>
+<h4 id="aprendizaje-supervisado">Aprendizaje Supervisado</h4>
+<p>El Aprendizaje Supervisado ocurre cuando el modelo se entrena en un conjunto de datos etiquetado. Esto significa que cada ejemplo en el conjunto de datos de entrenamiento está emparejado con la respuesta correcta (la etiqueta). El modelo aprende a predecir la salida a partir de las entradas durante el entrenamiento.</p>
+<h5 id="caso-pr%C3%A1ctico">Caso Práctico</h5>
+<ul>
+<li><strong>Predicción de Precios de Viviendas</strong>: Utilizando datos históricos de ventas de casas, un modelo puede aprender a predecir precios futuros basándose en características como el tamaño, la ubicación y el número de habitaciones.</li>
+</ul>
+<h4 id="aprendizaje-no-supervisado">Aprendizaje No Supervisado</h4>
+<p>El Aprendizaje No Supervisado se utiliza cuando no hay datos etiquetados disponibles. El sistema intenta aprender patrones y estructuras a partir de los datos sin ninguna guía explícita.</p>
+<h5 id="caso-pr%C3%A1ctico">Caso Práctico</h5>
+<ul>
+<li><strong>Segmentación de Clientes en Marketing</strong>: Agrupar clientes en diferentes categorías basadas en sus comportamientos y preferencias de compra, sin información previa sobre los grupos.</li>
+</ul>
+<h4 id="aprendizaje-por-refuerzo">Aprendizaje por Refuerzo</h4>
+<p>El Aprendizaje por Refuerzo es un tipo de ML donde un agente aprende a tomar decisiones optimizando una recompensa a través de la prueba y error. No se le dan datos de entrada y salida, sino que debe descubrir por sí mismo cuáles acciones producen las mayores recompensas.</p>
+<h5 id="caso-pr%C3%A1ctico">Caso Práctico</h5>
+<ul>
+<li><strong>Juegos</strong>: Algoritmos que aprenden a jugar y mejorar en juegos complejos como el tres en raya o el ajedrez, a través de la competencia contra sí mismos o contrincantes humanos.</li>
+</ul>
+<p><img src="https://rubenlopezg.files.wordpress.com/2015/05/direct_reward1.png" alt="Ejemplo de Aprendizaje por Refuerzo en Juegos"></p>
+<p><a href="#tabla-de-contenidos">Tabla de contenidos</a></p>
+<h3 id="fundamentos-de-python-para-machine-learning">Fundamentos de Python para Machine Learning</h3>
+<p>Python se ha convertido en uno de los lenguajes de programación más populares en el campo del Machine Learning y la Ciencia de Datos. Su simplicidad, legibilidad y una amplia gama de bibliotecas hacen de Python una herramienta esencial para cualquier profesional del ML.</p>
+<h4 id="introducci%C3%B3n-a-python">Introducción a Python</h4>
+<p>Python es un lenguaje de programación de alto nivel, interpretado, con un enfoque en la simplicidad y la legibilidad del código. Es ampliamente utilizado por su eficiencia y su extensa librería estándar, además de la gran comunidad que lo respalda.</p>
+<h4 id="ventajas-para-el-ml">Ventajas para el ML:</h4>
+<ul>
+<li><strong>Sintaxis Clara y Concisa</strong>: Facilita la escritura y lectura de código complejo.</li>
+<li><strong>Gran Comunidad</strong>: Amplio soporte y recursos de aprendizaje.</li>
+<li><strong>Portabilidad y Extensibilidad</strong>: Compatible con diversas plataformas y lenguajes.</li>
+</ul>
+<h3 id="bibliotecas-esenciales-numpy-pandas">Bibliotecas Esenciales: NumPy, Pandas</h3>
+<h4 id="numpy">NumPy</h4>
+<p>NumPy es una biblioteca fundamental para la computación científica en Python. Proporciona soporte para arrays y matrices grandes y multidimensionales, junto con una colección de funciones matemáticas para operar en estos arrays.</p>
+<h5 id="ejemplo-de-uso">Ejemplo de Uso:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># Crear un array NumPy</span>
+array = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
+print(array)
+</div></code></pre>
+<h4 id="pandas">Pandas</h4>
+<p>Pandas es una biblioteca que proporciona estructuras de datos y herramientas de análisis de datos de alto rendimiento y fácil de usar. Es ideal para trabajar con datos tabulares o heterogéneos.</p>
+<h5 id="ejemplo-de-uso">Ejemplo de Uso:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-comment"># Crear un DataFrame</span>
+data = {<span class="hljs-string">'Name'</span>: [<span class="hljs-string">'John'</span>, <span class="hljs-string">'Anna'</span>], <span class="hljs-string">'Age'</span>: [<span class="hljs-number">28</span>, <span class="hljs-number">22</span>]}
+df = pd.DataFrame(data)
+print(df)
+</div></code></pre>
+<h3 id="visualizaci%C3%B3n-de-datos-matplotlib-seaborn">Visualización de Datos: Matplotlib, Seaborn</h3>
+<p>La visualización es una parte crucial en el análisis de datos y el Machine Learning, ya que permite comprender mejor los datos y los resultados de los modelos.</p>
+<h4 id="matplotlib">Matplotlib</h4>
+<p>Matplotlib es una biblioteca de gráficos 2D en Python que permite crear figuras y gráficos de alta calidad.</p>
+<h5 id="ejemplo-de-gr%C3%A1fico">Ejemplo de Gráfico:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+plt.plot([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])
+plt.ylabel(<span class="hljs-string">'Algunos números'</span>)
+plt.show()
+</div></code></pre>
+<p><img src="/Img/grafico_simple_matplotlib.png" alt="Ejemplo de Gráfico con Matplotlib"></p>
+<h4 id="seaborn">Seaborn</h4>
+<p>Seaborn es una biblioteca de visualización de datos en Python basada en Matplotlib. Ofrece una interfaz de alto nivel para dibujar gráficos estadísticos atractivos y informativos.</p>
+<h5 id="ejemplo-de-gr%C3%A1fico">Ejemplo de Gráfico:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+
+<span class="hljs-comment"># Datos de ejemplo</span>
+tips = sns.load_dataset(<span class="hljs-string">"tips"</span>)
+sns.relplot(x=<span class="hljs-string">"total_bill"</span>, y=<span class="hljs-string">"tip"</span>, data=tips);
+</div></code></pre>
+<p><img src="/Img/grafico_simple_seaborn.png" alt="Ejemplo de Gráfico con Seaborn"></p>
+<h2 id="parte-ii-aprendizaje-supervisado">Parte II: Aprendizaje Supervisado</h2>
+<p><a href="#tabla-de-contenidos">Tabla de contenidos</a></p>
+<p>En el aprendizaje supervisado, los algoritmos aprenden de un conjunto de datos etiquetado, buscando predecir la salida para nuevas entradas basándose en el conocimiento adquirido.</p>
+<h3 id="regresi%C3%B3n">Regresión</h3>
+<p>La regresión en aprendizaje supervisado implica predecir valores continuos. Es crucial en muchos campos como la economía, la biología, y la ingeniería.</p>
+<ul>
+<li>
+<p>Regresión Lineal</p>
+<p>La Regresión Lineal es fundamental para entender cómo las variables independientes están relacionadas con la variable dependiente.</p>
+<p>Ejemplo:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+
+
+<span class="hljs-comment"># Datos de entrenamiento</span>
+X = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]])
+y = np.dot(X, np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>])) + <span class="hljs-number">3</span>
+
+<span class="hljs-comment"># Crear y entrenar el modelo</span>
+modelo = LinearRegression().fit(X, y)
+
+<span class="hljs-comment"># Predecir nuevos valores</span>
+print(modelo.predict(np.array([[<span class="hljs-number">3</span>, <span class="hljs-number">5</span>]])))
+</div></code></pre>
+</li>
+<li>
+<p>Regresión Polinómica</p>
+<p>La Regresión Polinómica es útil cuando la relación entre las variables independientes y dependientes no es lineal.</p>
+<p>Ejemplo:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> PolynomialFeatures
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+
+<span class="hljs-comment"># Datos de entrenamiento</span>
+X = np.array([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]).reshape(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>)
+y = np.array([<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>])
+
+<span class="hljs-comment"># Transformar datos a una forma polinómica</span>
+poly = PolynomialFeatures(degree=<span class="hljs-number">2</span>)
+X_poly = poly.fit_transform(X)
+
+<span class="hljs-comment"># Crear y entrenar el modelo</span>
+modelo = LinearRegression().fit(X_poly, y)
+
+<span class="hljs-comment"># Predecir nuevos valores</span>
+print(modelo.predict(poly.fit_transform(np.array([<span class="hljs-number">5</span>]).reshape(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>))))
+</div></code></pre>
+</li>
+<li>
+<p>Regresión con Árboles de Decisión</p>
+<p>Los Árboles de Decisión son versátiles y pueden usarse tanto para clasificación como para regresión.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeRegressor
+
+<span class="hljs-comment"># Datos de entrenamiento</span>
+X = [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]]
+y = [<span class="hljs-number">0.5</span>, <span class="hljs-number">2.5</span>]
+
+<span class="hljs-comment"># Crear y entrenar el modelo</span>
+modelo = DecisionTreeRegressor().fit(X, y)
+
+<span class="hljs-comment"># Predecir nuevos valores</span>
+print(modelo.predict([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]]))
+</div></code></pre>
+</li>
+</ul>
+<p>En cada uno de estos ejemplos, el código en Python ilustra cómo se pueden implementar y entrenar modelos de regresión, utilizando bibliotecas como sklearn, que es estándar en la industria del Machine Learning.</p>
+<h3 id="clasificaci%C3%B3n">Clasificación</h3>
+<p>La clasificación es una tarea fundamental en el aprendizaje supervisado, donde el objetivo es predecir etiquetas discretas (categorías) para nuevas instancias basándose en el aprendizaje realizado a partir de un conjunto de datos etiquetado.</p>
+<h4 id="k-nearest-neighbors-knn">K-Nearest Neighbors (KNN)</h4>
+<p>El algoritmo K-Nearest Neighbors (KNN) clasifica una nueva instancia basándose en la mayoría de votos de sus 'k' vecinos más cercanos.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier
+
+<span class="hljs-comment"># Datos de entrenamiento</span>
+X = [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]]
+y = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>]
+
+<span class="hljs-comment"># Crear y entrenar el modelo</span>
+knn = KNeighborsClassifier(n_neighbors=<span class="hljs-number">2</span>)
+knn.fit(X, y)
+
+<span class="hljs-comment"># Predecir una nueva instancia</span>
+print(knn.predict([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]]))
+</div></code></pre>
+<h4 id="m%C3%A1quinas-de-vectores-de-soporte-svm">Máquinas de Vectores de Soporte (SVM)</h4>
+<p>Las Máquinas de Vectores de Soporte (SVM) son un conjunto de algoritmos de aprendizaje supervisado utilizados para clasificación y regresión, destacando por su eficacia en espacios de alta dimensión.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> sklearn.svm <span class="hljs-keyword">import</span> SVC
+
+<span class="hljs-comment"># Datos de entrenamiento</span>
+X = [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]]
+y = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]
+
+<span class="hljs-comment"># Crear y entrenar el modelo</span>
+svc = SVC()
+svc.fit(X, y)
+
+<span class="hljs-comment"># Predecir una nueva instancia</span>
+print(svc.predict([[<span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>]]))
+</div></code></pre>
+<h4 id="%C3%A1rboles-de-decisi%C3%B3n-y-bosques-aleatorios">Árboles de Decisión y Bosques Aleatorios</h4>
+<h5 id="%C3%A1rboles-de-decisi%C3%B3n">Árboles de Decisión</h5>
+<p>Un árbol de decisión es un modelo de predicción utilizado en el ámbito del aprendizaje supervisado. Representa una serie de decisiones basadas en una secuencia de preguntas que pueden conducir a una conclusión o clasificación específica. Empieza en la raíz del árbol y se divide en varias ramas, cada una representando una de las posibles respuestas a la pregunta del nodo. Este proceso se repite en cada nodo subsiguiente hasta llegar a un nodo hoja.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier
+
+<span class="hljs-comment"># Datos de entrenamiento</span>
+X = [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]]
+y = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>]
+
+<span class="hljs-comment"># Crear y entrenar el modelo</span>
+tree = DecisionTreeClassifier()
+tree.fit(X, y)
+
+<span class="hljs-comment"># Predecir una nueva instancia</span>
+print(tree.predict([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]]))
+</div></code></pre>
+<h5 id="bosques-aleatorios">Bosques Aleatorios</h5>
+<p>Un bosque aleatorio es un conjunto (ensemble) de árboles de decisión, generalmente entrenados con el método de &quot;bagging&quot;. La idea es mejorar la precisión predictiva y controlar el sobreajuste.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> RandomForestClassifier
+
+<span class="hljs-comment"># Datos de entrenamiento</span>
+X = [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]]
+y = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>]
+
+<span class="hljs-comment"># Crear y entrenar el modelo</span>
+forest = RandomForestClassifier(n_estimators=<span class="hljs-number">10</span>)
+forest.fit(X, y)
+
+<span class="hljs-comment"># Predecir una nueva instancia</span>
+print(forest.predict([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]]))
+</div></code></pre>
+<p>Ambos, los árboles de decisión y los bosques aleatorios, son herramientas poderosas en machine learning. Los árboles de decisión son útiles por su simplicidad y facilidad de interpretación, mientras que los bosques aleatorios ofrecen una mayor precisión y robustez, especialmente en conjuntos de datos grandes y complejos.</p>
+<p>En esta sección, hemos cubierto tres métodos populares de clasificación en el aprendizaje supervisado, cada uno con su propio enfoque y ventajas. Los ejemplos de código proporcionan una base práctica para implementar estos algoritmos utilizando la biblioteca sklearn de Python, permitiendo una comprensión más profunda de cómo se pueden aplicar en problemas reales de clasificación.</p>
+<h2 id="parte-iii-aprendizaje-no-supervisado">Parte III: Aprendizaje No Supervisado</h2>
+<p><a href="#tabla-de-contenidos">Tabla de contenidos</a></p>
+<p>El aprendizaje no supervisado es una técnica de machine learning en la que los modelos se entrenan usando un conjunto de datos sin etiquetas. La idea es explorar la estructura subyacente de los datos para extraer patrones significativos o insights. A diferencia del aprendizaje supervisado, no se utilizan respuestas o etiquetas correctas para guiar el proceso de aprendizaje. El algoritmo intenta organizar los datos de manera que se revelen patrones o características intrínsecas.</p>
+<ul>
+<li>Auto-organización: Los algoritmos de aprendizaje no supervisado deben ser capaces de identificar patrones y estructuras por sí mismos.</li>
+<li>Exploración de Datos: Es ideal para explorar la estructura de los datos cuando no se conocen las categorías o grupos previamente.</li>
+<li>Flexibilidad: Puede adaptarse a una amplia variedad de datos y no está limitado por la necesidad de datos etiquetados.</li>
+</ul>
+<h3 id="clustering">Clustering</h3>
+<p>El Clustering es una técnica esencial en el aprendizaje no supervisado, que busca agrupar datos similares en conjuntos o clusters.</p>
+<h4 id="k-means">K-Means</h4>
+<p>K-Means es uno de los algoritmos de clustering más populares y sencillos. Busca dividir un conjunto de observaciones en 'k' grupos, minimizando la varianza dentro de cada grupo.</p>
+<h5 id="caracter%C3%ADsticas-del-k-means">Características del K-Means:</h5>
+<ul>
+<li>Asignación de Cluster: Cada punto de datos se asigna al cluster más cercano, basado en la distancia euclidiana.</li>
+<li>Centroides: Cada cluster tiene un centroide, que es un punto virtual representando el centro del cluster.</li>
+<li>Iterativo: El algoritmo alterna entre asignar puntos a los clusters y actualizar los centroides hasta que se alcanza la convergencia.</li>
+</ul>
+<h5 id="ejemplo-de-c%C3%B3digo-en-python">Ejemplo de Código en Python:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> KMeans
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># Datos de ejemplo</span>
+X = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">0</span>]])
+
+<span class="hljs-comment"># Crear y ajustar el modelo K-Means</span>
+kmeans = KMeans(n_clusters=<span class="hljs-number">2</span>, random_state=<span class="hljs-number">0</span>).fit(X)
+
+<span class="hljs-comment"># Predecir los clusters para los datos</span>
+clusters = kmeans.predict(X)
+
+<span class="hljs-comment"># Graficar los datos y los centroides</span>
+plt.scatter(X[:, <span class="hljs-number">0</span>], X[:, <span class="hljs-number">1</span>], c=clusters, cmap=<span class="hljs-string">'viridis'</span>)
+centroids = kmeans.cluster_centers_
+plt.scatter(centroids[:, <span class="hljs-number">0</span>], centroids[:, <span class="hljs-number">1</span>], marker=<span class="hljs-string">'X'</span>, s=<span class="hljs-number">169</span>, linewidths=<span class="hljs-number">3</span>, color=<span class="hljs-string">'r'</span>, zorder=<span class="hljs-number">10</span>)
+plt.title(<span class="hljs-string">'Ejemplo de Clustering con K-Means'</span>)
+plt.xlabel(<span class="hljs-string">'X'</span>)
+plt.ylabel(<span class="hljs-string">'Y'</span>)
+plt.show()
+</div></code></pre>
+<h5 id="resultados-y-aplicaciones">Resultados y Aplicaciones:</h5>
+<ul>
+<li>Visualización: En este ejemplo, los datos son agrupados en dos clusters distintos, lo cual se puede visualizar en el gráfico generado.</li>
+<li>Aplicaciones: K-Means es ampliamente utilizado en segmentación de mercado, organización de computadoras en redes, clasificación de documentos, y en muchas otras áreas donde se requiere una agrupación eficiente de conjuntos de datos.</li>
+</ul>
+<p>El algoritmo K-Means en Python, especialmente con la ayuda de <strong>sklearn</strong>, es una herramienta poderosa y fácil de usar para realizar tareas de clustering. Su simplicidad y eficacia lo hacen ideal para una amplia gama de aplicaciones en el campo del aprendizaje no supervisado.</p>
+<h4 id="clustering-jer%C3%A1rquico">Clustering Jerárquico</h4>
+<p>El Clustering Jerárquico es una técnica que busca construir una jerarquía de clusters. A diferencia de K-Means, no requiere especificar el número de clusters de antemano, y resulta en una estructura de árbol o dendrograma.</p>
+<h5 id="caracter%C3%ADsticas-del-clustering-jer%C3%A1rquico">Características del Clustering Jerárquico:</h5>
+<ul>
+<li>Métodos de Enlace: Determina cómo se miden las distancias entre clusters. Los métodos comunes incluyen enlace simple, completo y promedio.</li>
+<li>Dendrograma: Un árbol que muestra la disposición de los clusters formados en cada etapa.</li>
+<li>Corte del Dendrograma: Al cortar el dendrograma en un nivel específico, se pueden obtener un número deseado de clusters.</li>
+</ul>
+<h4 id="ejemplo-de-c%C3%B3digo-en-python">Ejemplo de Código en Python:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> scipy.cluster.hierarchy <span class="hljs-keyword">import</span> dendrogram, linkage
+<span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># Datos de ejemplo</span>
+X = np.array([[<span class="hljs-number">5</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">15</span>], [<span class="hljs-number">15</span>, <span class="hljs-number">12</span>], [<span class="hljs-number">24</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">30</span>, <span class="hljs-number">30</span>],
+              [<span class="hljs-number">85</span>, <span class="hljs-number">70</span>], [<span class="hljs-number">71</span>, <span class="hljs-number">80</span>], [<span class="hljs-number">60</span>, <span class="hljs-number">78</span>], [<span class="hljs-number">55</span>, <span class="hljs-number">52</span>], [<span class="hljs-number">80</span>, <span class="hljs-number">91</span>]])
+
+<span class="hljs-comment"># Realizar el clustering jerárquico</span>
+linked = linkage(X, <span class="hljs-string">'single'</span>)
+
+<span class="hljs-comment"># Graficar el dendrograma</span>
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">7</span>))
+dendrogram(linked, orientation=<span class="hljs-string">'top'</span>, distance_sort=<span class="hljs-string">'descending'</span>, show_leaf_counts=<span class="hljs-literal">True</span>)
+plt.show()
+</div></code></pre>
+<h5 id="aplicaciones-del-clustering-jer%C3%A1rquico">Aplicaciones del Clustering Jerárquico:</h5>
+<ul>
+<li>Análisis de Datos Genéticos: Agrupar genes o muestras con perfiles de expresión genética similares.</li>
+<li>Segmentación del Mercado: Agrupar clientes con comportamientos o preferencias similares.</li>
+<li>Organización de Información: Como en bibliotecas o sistemas de información para agrupar recursos similares.</li>
+</ul>
+<p>El Clustering Jerárquico es una herramienta poderosa en Machine Learning para descubrir relaciones inherentes en los datos, especialmente útil cuando la estructura de los clusters es compleja o cuando no se conoce el número de clusters a priori.</p>
+<h4 id="clustering-dbscan">Clustering DBSCAN</h4>
+<h3 id="reducci%C3%B3n-de-dimensionalidad">Reducción de Dimensionalidad</h3>
+<h4 id="an%C3%A1lisis-de-componentes-principales-pca">Análisis de Componentes Principales (PCA)</h4>
+<h4 id="t-distributed-stochastic-neighbor-embedding-t-sne">t-Distributed Stochastic Neighbor Embedding (t-SNE)</h4>
+<h2 id="parte-iv-aprendizaje-por-refuerzo">Parte IV: Aprendizaje por Refuerzo</h2>
+<h3 id="conceptos-b%C3%A1sicos-de-aprendizaje-por-refuerzo">Conceptos Básicos de Aprendizaje por Refuerzo</h3>
+<ul>
+<li>El Problema del Bandido Multibrazo</li>
+<li>Algoritmos de Valor y Política</li>
+</ul>
+<h3 id="aplicaciones-avanzadas">Aplicaciones Avanzadas</h3>
+<ul>
+<li>Q-Learning</li>
+<li>Deep Q-Networks (DQN)</li>
+</ul>
+<h2 id="parte-v-t%C3%A9cnicas-avanzadas">Parte V: Técnicas Avanzadas</h2>
+<h3 id="redes-neuronales-y-deep-learning">Redes Neuronales y Deep Learning</h3>
+<ul>
+<li>Perceptrones y Redes Neuronales Artificiales</li>
+<li>Redes Neuronales Convolucionales (CNN)</li>
+<li>Redes Neuronales Recurrentes (RNN)</li>
+</ul>
+<h3 id="natural-language-processing-nlp-con-python">Natural Language Processing (NLP) con Python</h3>
+<ul>
+<li>Procesamiento del Lenguaje Natural</li>
+<li>Modelado de Temas</li>
+<li>Análisis de Sentimientos</li>
+</ul>
+<h2 id="parte-vi-herramientas-y-mejores-pr%C3%A1cticas">Parte VI: Herramientas y Mejores Prácticas</h2>
+<h3 id="evaluaci%C3%B3n-y-ajuste-de-modelos">Evaluación y Ajuste de Modelos</h3>
+<ul>
+<li>Validación Cruzada</li>
+<li>Ajuste de Hiperparámetros</li>
+<li>Métricas de Evaluación</li>
+</ul>
+<h3 id="despliegue-de-modelos-de-machine-learning">Despliegue de Modelos de Machine Learning</h3>
+<ul>
+<li>Introducción al Despliegue de Modelos</li>
+<li>Uso de Flask para APIs de Modelos de ML</li>
+<li>Consideraciones de Escalabilidad y Rendimiento</li>
+</ul>
+<h2 id="parte-vii-estudios-de-caso-y-proyectos">Parte VII: Estudios de Caso y Proyectos</h2>
+<h3 id="proyectos-de-machine-learning">Proyectos de Machine Learning</h3>
+<ul>
+<li>Detección de Fraude</li>
+<li>Recomendaciones de Productos</li>
+<li>Reconocimiento de Imágenes y Voz</li>
+</ul>
+<h3 id="%C3%A9tica-y-consideraciones-legales-en-machine-learning">Ética y Consideraciones Legales en Machine Learning</h3>
+<ul>
+<li>Sesgos en los Datos y Modelos</li>
+<li>Privacidad y Seguridad de Datos</li>
+<li>Regulaciones y Cumplimiento Legal</li>
+</ul>
+<h2 id="bibliograf%C3%ADa">Bibliografía</h2>
+<h4 id="kaggle"><a href="https://www.kaggle.com/learn">Kaggle</a></h4>
+<h4 id="w3schools"><a href="https://www.w3schools.com/python/python_ml_getting_started.asp">W3Schools</a></h4>
+<h4 id="machinelearningmastery"><a href="https://machinelearningmastery.com/machine-learning-in-python-step-by-step/">Machinelearningmastery</a></h4>
+<h4 id="scipy"><a href="https://scipy.org/">Scipy</a></h4>
+<h4 id="freecodecamp"><a href="https://www.freecodecamp.org/espanol/learn/machine-learning-with-python/">FreeCodeCamp</a></h4>
+<h4 id="chatgpt"><a href="https://chat.openai.com/">ChatGPT</a></h4>
+<h4 id="siim"><a href="https://siim.org/">SIIM</a></h4>
+
+</body>
+</html>

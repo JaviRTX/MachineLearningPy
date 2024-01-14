@@ -43,9 +43,25 @@
   - [Parte II: Aprendizaje Supervisado](#parte-ii-aprendizaje-supervisado)
     - [Regresión](#regresión)
     - [Clasificación](#clasificación)
+      - [K-Nearest Neighbors (KNN)](#k-nearest-neighbors-knn)
+      - [Máquinas de Vectores de Soporte (SVM)](#máquinas-de-vectores-de-soporte-svm)
+      - [Árboles de Decisión y Bosques Aleatorios](#árboles-de-decisión-y-bosques-aleatorios)
+        - [Árboles de Decisión](#árboles-de-decisión)
+        - [Bosques Aleatorios](#bosques-aleatorios)
   - [Parte III: Aprendizaje No Supervisado](#parte-iii-aprendizaje-no-supervisado)
     - [Clustering](#clustering)
+      - [K-Means](#k-means)
+        - [Características del K-Means:](#características-del-k-means)
+        - [Ejemplo de Código en Python:](#ejemplo-de-código-en-python)
+        - [Resultados y Aplicaciones:](#resultados-y-aplicaciones)
+      - [Clustering Jerárquico](#clustering-jerárquico)
+        - [Características del Clustering Jerárquico:](#características-del-clustering-jerárquico)
+      - [Ejemplo de Código en Python:](#ejemplo-de-código-en-python-1)
+        - [Aplicaciones del Clustering Jerárquico:](#aplicaciones-del-clustering-jerárquico)
+      - [Clustering DBSCAN](#clustering-dbscan)
     - [Reducción de Dimensionalidad](#reducción-de-dimensionalidad)
+      - [Análisis de Componentes Principales (PCA)](#análisis-de-componentes-principales-pca)
+      - [t-Distributed Stochastic Neighbor Embedding (t-SNE)](#t-distributed-stochastic-neighbor-embedding-t-sne)
   - [Parte IV: Aprendizaje por Refuerzo](#parte-iv-aprendizaje-por-refuerzo)
     - [Conceptos Básicos de Aprendizaje por Refuerzo](#conceptos-básicos-de-aprendizaje-por-refuerzo)
     - [Aplicaciones Avanzadas](#aplicaciones-avanzadas)
@@ -337,23 +353,179 @@ La regresión en aprendizaje supervisado implica predecir valores continuos. Es 
 En cada uno de estos ejemplos, el código en Python ilustra cómo se pueden implementar y entrenar modelos de regresión, utilizando bibliotecas como sklearn, que es estándar en la industria del Machine Learning.
 
 ### Clasificación
+La clasificación es una tarea fundamental en el aprendizaje supervisado, donde el objetivo es predecir etiquetas discretas (categorías) para nuevas instancias basándose en el aprendizaje realizado a partir de un conjunto de datos etiquetado.
+#### K-Nearest Neighbors (KNN)
 
-- K-Nearest Neighbors (KNN)
-- Máquinas de Vectores de Soporte (SVM)
-- Árboles de Decisión y Bosques Aleatorios
+El algoritmo K-Nearest Neighbors (KNN) clasifica una nueva instancia basándose en la mayoría de votos de sus 'k' vecinos más cercanos.
+
+```python
+from sklearn.neighbors import KNeighborsClassifier
+
+# Datos de entrenamiento
+X = [[0, 0], [1, 1], [2, 2]]
+y = [0, 1, 1]
+
+# Crear y entrenar el modelo
+knn = KNeighborsClassifier(n_neighbors=2)
+knn.fit(X, y)
+
+# Predecir una nueva instancia
+print(knn.predict([[1, 1]]))
+```
+
+#### Máquinas de Vectores de Soporte (SVM)
+Las Máquinas de Vectores de Soporte (SVM) son un conjunto de algoritmos de aprendizaje supervisado utilizados para clasificación y regresión, destacando por su eficacia en espacios de alta dimensión.
+```python
+from sklearn.svm import SVC
+
+# Datos de entrenamiento
+X = [[0, 0], [1, 1]]
+y = [0, 1]
+
+# Crear y entrenar el modelo
+svc = SVC()
+svc.fit(X, y)
+
+# Predecir una nueva instancia
+print(svc.predict([[2., 2.]]))
+```
+
+#### Árboles de Decisión y Bosques Aleatorios
+##### Árboles de Decisión
+Un árbol de decisión es un modelo de predicción utilizado en el ámbito del aprendizaje supervisado. Representa una serie de decisiones basadas en una secuencia de preguntas que pueden conducir a una conclusión o clasificación específica. Empieza en la raíz del árbol y se divide en varias ramas, cada una representando una de las posibles respuestas a la pregunta del nodo. Este proceso se repite en cada nodo subsiguiente hasta llegar a un nodo hoja.
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+
+# Datos de entrenamiento
+X = [[0, 0], [1, 1], [2, 2]]
+y = [0, 1, 1]
+
+# Crear y entrenar el modelo
+tree = DecisionTreeClassifier()
+tree.fit(X, y)
+
+# Predecir una nueva instancia
+print(tree.predict([[1, 1]]))
+```
+
+##### Bosques Aleatorios
+Un bosque aleatorio es un conjunto (ensemble) de árboles de decisión, generalmente entrenados con el método de "bagging". La idea es mejorar la precisión predictiva y controlar el sobreajuste.
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+# Datos de entrenamiento
+X = [[0, 0], [1, 1], [2, 2]]
+y = [0, 1, 1]
+
+# Crear y entrenar el modelo
+forest = RandomForestClassifier(n_estimators=10)
+forest.fit(X, y)
+
+# Predecir una nueva instancia
+print(forest.predict([[1, 1]]))
+```
+Ambos, los árboles de decisión y los bosques aleatorios, son herramientas poderosas en machine learning. Los árboles de decisión son útiles por su simplicidad y facilidad de interpretación, mientras que los bosques aleatorios ofrecen una mayor precisión y robustez, especialmente en conjuntos de datos grandes y complejos.
+
+En esta sección, hemos cubierto tres métodos populares de clasificación en el aprendizaje supervisado, cada uno con su propio enfoque y ventajas. Los ejemplos de código proporcionan una base práctica para implementar estos algoritmos utilizando la biblioteca sklearn de Python, permitiendo una comprensión más profunda de cómo se pueden aplicar en problemas reales de clasificación.
 
 ## Parte III: Aprendizaje No Supervisado
+[Tabla de contenidos](#tabla-de-contenidos)
+
+El aprendizaje no supervisado es una técnica de machine learning en la que los modelos se entrenan usando un conjunto de datos sin etiquetas. La idea es explorar la estructura subyacente de los datos para extraer patrones significativos o insights. A diferencia del aprendizaje supervisado, no se utilizan respuestas o etiquetas correctas para guiar el proceso de aprendizaje. El algoritmo intenta organizar los datos de manera que se revelen patrones o características intrínsecas.
+
+- Auto-organización: Los algoritmos de aprendizaje no supervisado deben ser capaces de identificar patrones y estructuras por sí mismos.
+- Exploración de Datos: Es ideal para explorar la estructura de los datos cuando no se conocen las categorías o grupos previamente.
+- Flexibilidad: Puede adaptarse a una amplia variedad de datos y no está limitado por la necesidad de datos etiquetados.
 
 ### Clustering
+El Clustering es una técnica esencial en el aprendizaje no supervisado, que busca agrupar datos similares en conjuntos o clusters. 
 
-- K-Means
-- Clustering Jerárquico
-- Clustering DBSCAN
+#### K-Means
+
+K-Means es uno de los algoritmos de clustering más populares y sencillos. Busca dividir un conjunto de observaciones en 'k' grupos, minimizando la varianza dentro de cada grupo.
+
+##### Características del K-Means:
+
+- Asignación de Cluster: Cada punto de datos se asigna al cluster más cercano, basado en la distancia euclidiana.
+- Centroides: Cada cluster tiene un centroide, que es un punto virtual representando el centro del cluster.
+- Iterativo: El algoritmo alterna entre asignar puntos a los clusters y actualizar los centroides hasta que se alcanza la convergencia.
+
+##### Ejemplo de Código en Python:
+
+```python
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Datos de ejemplo
+X = np.array([[1, 2], [1, 4], [1, 0], [10, 2], [10, 4], [10, 0]])
+
+# Crear y ajustar el modelo K-Means
+kmeans = KMeans(n_clusters=2, random_state=0).fit(X)
+
+# Predecir los clusters para los datos
+clusters = kmeans.predict(X)
+
+# Graficar los datos y los centroides
+plt.scatter(X[:, 0], X[:, 1], c=clusters, cmap='viridis')
+centroids = kmeans.cluster_centers_
+plt.scatter(centroids[:, 0], centroids[:, 1], marker='X', s=169, linewidths=3, color='r', zorder=10)
+plt.title('Ejemplo de Clustering con K-Means')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.show()
+```
+
+##### Resultados y Aplicaciones:
+
+- Visualización: En este ejemplo, los datos son agrupados en dos clusters distintos, lo cual se puede visualizar en el gráfico generado.
+- Aplicaciones: K-Means es ampliamente utilizado en segmentación de mercado, organización de computadoras en redes, clasificación de documentos, y en muchas otras áreas donde se requiere una agrupación eficiente de conjuntos de datos.
+
+El algoritmo K-Means en Python, especialmente con la ayuda de **sklearn**, es una herramienta poderosa y fácil de usar para realizar tareas de clustering. Su simplicidad y eficacia lo hacen ideal para una amplia gama de aplicaciones en el campo del aprendizaje no supervisado.
+
+#### Clustering Jerárquico
+
+El Clustering Jerárquico es una técnica que busca construir una jerarquía de clusters. A diferencia de K-Means, no requiere especificar el número de clusters de antemano, y resulta en una estructura de árbol o dendrograma.
+
+##### Características del Clustering Jerárquico:
+
+- Métodos de Enlace: Determina cómo se miden las distancias entre clusters. Los métodos comunes incluyen enlace simple, completo y promedio.
+- Dendrograma: Un árbol que muestra la disposición de los clusters formados en cada etapa.
+- Corte del Dendrograma: Al cortar el dendrograma en un nivel específico, se pueden obtener un número deseado de clusters.
+
+#### Ejemplo de Código en Python:
+
+```python
+import numpy as np
+from scipy.cluster.hierarchy import dendrogram, linkage
+from matplotlib import pyplot as plt
+
+# Datos de ejemplo
+X = np.array([[5, 3], [10, 15], [15, 12], [24, 10], [30, 30],
+              [85, 70], [71, 80], [60, 78], [55, 52], [80, 91]])
+
+# Realizar el clustering jerárquico
+linked = linkage(X, 'single')
+
+# Graficar el dendrograma
+plt.figure(figsize=(10, 7))
+dendrogram(linked, orientation='top', distance_sort='descending', show_leaf_counts=True)
+plt.show()
+```
+##### Aplicaciones del Clustering Jerárquico:
+- Análisis de Datos Genéticos: Agrupar genes o muestras con perfiles de expresión genética similares.
+- Segmentación del Mercado: Agrupar clientes con comportamientos o preferencias similares.
+- Organización de Información: Como en bibliotecas o sistemas de información para agrupar recursos similares.
+
+El Clustering Jerárquico es una herramienta poderosa en Machine Learning para descubrir relaciones inherentes en los datos, especialmente útil cuando la estructura de los clusters es compleja o cuando no se conoce el número de clusters a priori.
+
+#### Clustering DBSCAN
 
 ### Reducción de Dimensionalidad
 
-- Análisis de Componentes Principales (PCA)
-- t-Distributed Stochastic Neighbor Embedding (t-SNE)
+#### Análisis de Componentes Principales (PCA)
+#### t-Distributed Stochastic Neighbor Embedding (t-SNE)
 
 ## Parte IV: Aprendizaje por Refuerzo
 
