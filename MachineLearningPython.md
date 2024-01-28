@@ -440,10 +440,13 @@ Seaborn es una biblioteca de visualización de datos en Python basada en Matplot
 
 ```python
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Datos de ejemplo
 tips = sns.load_dataset("tips")
-sns.relplot(x="total_bill", y="tip", data=tips);
+sns.relplot(x="total_bill", y="tip", data=tips)
+
+plt.show() 
 ```
 
 ## Parte II: Aprendizaje Supervisado
@@ -828,6 +831,11 @@ Es un problema clásico que ejemplifica el dilema entre exploración y explotaci
 
 ```python
 import numpy as np
+import random
+
+# Suposiciones sobre el entorno y las acciones
+espacio_de_estados = 10  # Ejemplo: 10 estados diferentes
+espacio_de_acciones = 4  # Ejemplo: 4 acciones posibles
 
 # Inicializar la tabla Q
 Q = np.zeros([espacio_de_estados, espacio_de_acciones])
@@ -835,16 +843,45 @@ Q = np.zeros([espacio_de_estados, espacio_de_acciones])
 # Parámetros del algoritmo
 alpha = 0.1  # Tasa de aprendizaje
 gamma = 0.6  # Factor de descuento
+total_episodios = 10000  # Total de episodios para entrenar
+
+# Funciones adicionales necesarias
+def resetear_entorno():
+    # Devuelve un estado inicial aleatorio
+    return random.randint(0, espacio_de_estados - 1)
+
+def elegir_accion(estado, Q):
+    # Ejemplo: elegir una acción aleatoriamente
+    return random.randint(0, espacio_de_acciones - 1)
+
+def tomar_accion(accion):
+    # Devuelve un nuevo estado, recompensa y si es el estado final
+    nuevo_estado = random.randint(0, espacio_de_estados - 1)
+    recompensa = random.random()  # Ejemplo: recompensa aleatoria
+    final = nuevo_estado == espacio_de_estados - 1  # Ejemplo: condición de finalización
+    return nuevo_estado, recompensa, final
+
+def actualizar_Q(Q, estado, accion, recompensa, nuevo_estado, alpha, gamma):
+    # Fórmula de actualización de Q-Learning
+    mejor_prediccion = np.max(Q[nuevo_estado])
+    Q_actual = Q[estado, accion]
+    Q[estado, accion] = Q_actual + alpha * (recompensa + gamma * mejor_prediccion - Q_actual)
+    return Q[estado, accion]
 
 # Proceso de aprendizaje
 for episodio in range(total_episodios):
     estado = resetear_entorno()
+    final = False
 
-    while no es final:
+    while not final:
         accion = elegir_accion(estado, Q)
         nuevo_estado, recompensa, final = tomar_accion(accion)
         Q[estado, accion] = actualizar_Q(Q, estado, accion, recompensa, nuevo_estado, alpha, gamma)
         estado = nuevo_estado
+
+# Mostrar la tabla Q final
+print("Tabla Q aprendida:")
+print(Q)
 ```
 
 #### Deep Q-Networks (DQN)
