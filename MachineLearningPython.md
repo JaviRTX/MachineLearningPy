@@ -136,6 +136,10 @@
     - [Parte V: Técnicas Avanzadas](#parte-v-técnicas-avanzadas-1)
     - [Parte VI: Herramientas y Mejores Prácticas](#parte-vi-herramientas-y-mejores-prácticas-1)
     - [Parte VII: Estudios de Caso y Proyectos](#parte-vii-estudios-de-caso-y-proyectos-1)
+  - [Sistema CRUD para Machine Learning en Python con MySQL](#sistema-crud-para-machine-learning-en-python-con-mysql)
+    - [Paso 1: Configurar el Entorno](#paso-1-configurar-el-entorno)
+      - [Instalar MySQL y Python](#instalar-mysql-y-python)
+    - [Paso 2: Implementación CRUD (Código)](#paso-2-implementación-crud-código)
   - [Bibliografía](#bibliografía)
       - [Kaggle](#kaggle)
       - [W3Schools](#w3schools)
@@ -144,6 +148,19 @@
       - [FreeCodeCamp](#freecodecamp)
       - [ChatGPT](#chatgpt)
       - [SIIM](#siim)
+      - [Documentación numpy](#documentación-numpy)
+      - [Documentación pandas](#documentación-pandas)
+      - [Documentación matplotlib](#documentación-matplotlib)
+      - [Documentación scikit-learn](#documentación-scikit-learn)
+      - [Documentación scipy](#documentación-scipy)
+      - [Documentación nltk](#documentación-nltk)
+      - [Documentación textblob](#documentación-textblob)
+      - [Documentación tensorflow](#documentación-tensorflow)
+      - [Documentación flask](#documentación-flask)
+      - [Documentación joblib](#documentación-joblib)
+      - [Documentación collections-extended](#documentación-collections-extended)
+      - [Documentación keras API](#documentación-keras-api)
+      - [Documentación mysql-connector](#documentación-mysql-connector)
 
 ## **Instalación**
 
@@ -206,6 +223,7 @@
 Puedes instalar las siguientes bibliotecas utilizando pip, el gestor de paquetes de Python. Abre tu terminal o línea de comandos e introduce los siguientes comandos:
 
 ### Bibliotecas Básicas
+**Para facilitar el aprendizaje se aporta documentación del contenido en la bibliografía y en los distintos apartados**
 
 ```bash
 pip install numpy
@@ -213,8 +231,14 @@ pip install pandas
 pip install matplotlib
 pip install seaborn
 ```
-
 Estas bibliotecas son esenciales para el análisis de datos y la visualización.
+
+- [Documentación numpy](https://numpy.org/doc/)
+- [Documentación pandas](https://pandas.pydata.org/docs/)
+- [Documentación matplotlib](https://matplotlib.org/stable/index.html)
+- [Documentación seaborn](https://seaborn.pydata.org/)
+  
+
 
 ### Machine Learning y Procesamiento de Datos
 
@@ -222,8 +246,11 @@ Estas bibliotecas son esenciales para el análisis de datos y la visualización.
 pip install scikit-learn
 pip install scipy
 ```
-
 Scikit-learn y SciPy son fundamentales para algoritmos de Machine Learning y operaciones matemáticas.
+
+- [Documentación scikit-learn](https://scikit-learn.org/stable/user_guide.html)
+- [Documentación scipy](https://docs.scipy.org/doc/scipy/)
+
 
 ### Procesamiento del Lenguaje Natural
 
@@ -234,6 +261,9 @@ pip install textblob
 
 NLTK y TextBlob son útiles para tareas de procesamiento del lenguaje natural.
 
+- [Documentación nltk](https://www.nltk.org/)
+- [Documentación textblob](https://textblob.readthedocs.io/en/dev/)
+
 ### Deep Learning
 
 ```bash
@@ -241,6 +271,8 @@ pip install tensorflow
 ```
 
 TensorFlow es una biblioteca poderosa para la creación de modelos de Deep Learning.
+
+- [Documentación tensorflow](https://www.tensorflow.org/api_docs)
 
 ### Trabajo con APIs y Web
 
@@ -251,12 +283,17 @@ pip install joblib
 
 Flask es un micro framework web, y joblib es útil para guardar y cargar modelos.
 
+- [Documentación flask](https://flask-es.readthedocs.io/)
+- [Documentación joblib](https://joblib.readthedocs.io/en/stable/)
+
 ### Otras Bibliotecas Útiles
 
 ```bash
 pip install collections-extended  # Extiende las colecciones integradas en Python
 ```
 
+- [Documentación collections-extended](https://collections-extended.lenzm.net/)
+  
 ### Verificación de la Instalación
 
 Para verificar que las bibliotecas se han instalado correctamente, puedes importarlas en un intérprete de Python o un Jupyter Notebook:
@@ -2287,6 +2324,216 @@ print("Coeficiente R²:", r2)
 
     </details>
 
+## Sistema CRUD para Machine Learning en Python con MySQL
+
+### Paso 1: Configurar el Entorno
+
+#### Instalar MySQL y Python
+
+- Instale MySQL en su sistema y un cliente de MySQL como MySQL Workbench.
+  
+  ```sql
+  DROP DATABASE IF EXISTS machinelearningdb;
+  CREATE DATABASE machinelearningdb;
+  USE machinelearningdb;
+
+  CREATE TABLE clientes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      nombre VARCHAR(255),
+      edad INT,
+      ingresos FLOAT
+  );
+
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Ana', 30, 40000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Juan', 25, 35000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Lucía', 40, 50000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Carlos', 22, 28000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Sofía', 35, 45000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Luis', 45, 55000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Marta', 28, 32000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('David', 33, 48000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Elena', 50, 60000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Mario', 38, 52000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Laura', 29, 37000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Pedro', 41, 53000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Inés', 31, 41000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Diego', 39, 51000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Raquel', 34, 47000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Jorge', 27, 33000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Carmen', 36, 49000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Óscar', 42, 56000);
+  ```
+
+- Instale las bibliotecas necesarias en Python: `mysql-connector-python`, `numpy`, `pandas` y `scikit-learn`.
+
+  ```bash
+  pip install mysql-connector-python numpy pandas scikit-learn
+  ```
+
+### Paso 2: Implementación CRUD (Código)
+
+  ```python
+  import mysql.connector
+  from mysql.connector import Error
+  import pandas as pd
+  from sklearn.linear_model import LinearRegression
+  from sklearn.model_selection import train_test_split
+  from sklearn.metrics import mean_squared_error
+
+  # Función para conectar a la base de datos
+  def conectar_db():
+      try:
+          conn = mysql.connector.connect(
+              host="localhost",  # Cambia a tu host
+              user="root",      # Cambia a tu usuario
+              password="root",      # Cambia a tu contraseña
+              database="machinelearningdb"
+          )
+          if conn.is_connected():
+              return conn
+      except Error as e:
+          print("Error al conectar a MySQL", e)
+
+  # Funciones CRUD
+
+  def insertar_cliente():
+      nombre = input("Ingrese el nombre del cliente: ")
+      edad = int(input("Ingrese la edad del cliente: "))
+      ingresos = float(input("Ingrese los ingresos del cliente: "))
+      try:
+          conn = conectar_db()
+          cursor = conn.cursor()
+          query = "INSERT INTO clientes (nombre, edad, ingresos) VALUES (%s, %s, %s)"
+          cursor.execute(query, (nombre, edad, ingresos))
+          conn.commit()
+          print("Cliente insertado con éxito.")
+      except Error as e:
+          print("Error al insertar cliente", e)
+      finally:
+          if conn.is_connected():
+              cursor.close()
+              conn.close()
+
+  def leer_clientes():
+      try:
+          conn = conectar_db()
+          cursor = conn.cursor()
+          query = "SELECT * FROM clientes"
+          cursor.execute(query)
+          result = cursor.fetchall()
+          return pd.DataFrame(result, columns=['id', 'nombre', 'edad', 'ingresos'])
+      except Error as e:
+          print("Error al leer clientes", e)
+      finally:
+          if conn.is_connected():
+              cursor.close()
+              conn.close()
+
+  def actualizar_cliente():
+      id_cliente = int(input("Ingrese el ID del cliente a actualizar: "))
+      nombre = input("Ingrese el nuevo nombre del cliente: ")
+      edad = int(input("Ingrese la nueva edad del cliente: "))
+      ingresos = float(input("Ingrese los nuevos ingresos del cliente: "))
+      try:
+          conn = conectar_db()
+          cursor = conn.cursor()
+          query = "UPDATE Clientes SET nombre = %s, edad = %s, ingresos = %s WHERE id = %s"
+          cursor.execute(query, (nombre, edad, ingresos, id_cliente))
+          conn.commit()
+          print("Cliente actualizado con éxito.")
+      except Error as e:
+          print("Error al actualizar cliente", e)
+      finally:
+          if conn.is_connected():
+              cursor.close()
+              conn.close()
+
+  def eliminar_cliente():
+      id_cliente = int(input("Ingrese el ID del cliente a eliminar: "))
+      try:
+          conn = conectar_db()
+          cursor = conn.cursor()
+          query = "DELETE FROM clientes WHERE id = %s"
+          cursor.execute(query, (id_cliente,))
+          conn.commit()
+          print("Cliente eliminado con éxito.")
+      except Error as e:
+          print("Error al eliminar cliente", e)
+      finally:
+          if conn.is_connected():
+              cursor.close()
+              conn.close()
+
+  # Funciones para manejar el modelo de Machine Learning
+  def entrenar_modelo():
+      datos = leer_clientes()
+      X = datos[['edad']]  # Característica: Edad
+      y = datos['ingresos']  # Etiqueta: Ingresos
+      X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+      modelo = LinearRegression()
+      modelo.fit(X_train, y_train)
+      predicciones = modelo.predict(X_test)
+      mse = mean_squared_error(y_test, predicciones)
+      return modelo, mse
+
+  modelo_global = None  # Variable global para almacenar el modelo entrenado
+
+  # Función para hacer una predicción
+  def hacer_prediccion():
+      global modelo_global
+      if modelo_global is not None:
+          try:
+              edad_para_prediccion = int(input("Ingrese la edad para la predicción: "))
+              # Asegurarse de que los datos para la predicción tengan el mismo formato y nombres de características
+              datos_prediccion = pd.DataFrame([[edad_para_prediccion]], columns=['edad'])
+              prediccion_ingreso = modelo_global.predict(datos_prediccion)
+              print(f"Ingresos predichos para una persona de {edad_para_prediccion} años: {prediccion_ingreso[0]}")
+          except ValueError:
+              print("Por favor, ingrese un número válido.")
+      else:
+          print("Primero necesita entrenar el modelo.")
+
+  # Menú interactivo para operaciones CRUD
+  def menu_crud():
+      global modelo_global
+      while True:
+          print("\nOperaciones CRUD:")
+          print("1. Insertar Cliente")
+          print("2. Mostrar Clientes")
+          print("3. Actualizar Cliente")
+          print("4. Eliminar Cliente")
+          print("5. Entrenar Modelo")
+          print("6. Hacer una Predicción")
+          print("7. Salir")
+          opcion = input("Seleccione una opción: ")
+
+          try:
+              opcion = int(opcion)
+          except ValueError:
+              print("Por favor, ingrese un número válido.")
+              continue
+
+          if opcion == 1:
+              insertar_cliente()
+          elif opcion == 2:
+              print(leer_clientes())
+          elif opcion == 3:
+              actualizar_cliente()
+          elif opcion == 4:
+              eliminar_cliente()
+          elif opcion == 5:
+              modelo_global, mse = entrenar_modelo()
+              print(f"Modelo entrenado. Error cuadrático medio: {mse}")
+          elif opcion == 6:
+              hacer_prediccion()
+          elif opcion == 7:
+              break
+          else:
+              print("Opción no válida.")
+
+  menu_crud()
+  ```
+
 ## Bibliografía
 
 #### [Kaggle](https://www.kaggle.com/learn)
@@ -2302,3 +2549,29 @@ print("Coeficiente R²:", r2)
 #### [ChatGPT](https://chat.openai.com/)
 
 #### [SIIM](https://siim.org/)
+
+#### [Documentación numpy](https://numpy.org/doc/)
+
+#### [Documentación pandas](https://pandas.pydata.org/docs/)
+
+#### [Documentación matplotlib](https://matplotlib.org/stable/index.html)
+
+#### [Documentación scikit-learn](https://scikit-learn.org/stable/user_guide.html)
+
+#### [Documentación scipy](https://docs.scipy.org/doc/scipy/)
+
+#### [Documentación nltk](https://www.nltk.org/)
+
+#### [Documentación textblob](https://textblob.readthedocs.io/en/dev/)
+
+#### [Documentación tensorflow](https://www.tensorflow.org/api_docs)
+
+#### [Documentación flask](https://flask-es.readthedocs.io/)
+
+#### [Documentación joblib](https://joblib.readthedocs.io/en/stable/)
+
+#### [Documentación collections-extended](https://collections-extended.lenzm.net/)
+
+#### [Documentación keras API](https://keras.io/)
+
+#### [Documentación mysql-connector](https://dev.mysql.com/doc/connector-python/en/)
