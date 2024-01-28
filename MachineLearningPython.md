@@ -273,6 +273,7 @@ pip install tensorflow
 TensorFlow es una biblioteca poderosa para la creación de modelos de Deep Learning.
 
 - [Documentación tensorflow](https://www.tensorflow.org/api_docs)
+- [Guía de instalación de TF en caso de errores](https://www.tensorflow.org/install/pip?hl=es#linux)
 
 ### Trabajo con APIs y Web
 
@@ -2384,9 +2385,9 @@ print("Coeficiente R²:", r2)
   def conectar_db():
       try:
           conn = mysql.connector.connect(
-              host="localhost",  # Cambia a tu host
-              user="root",      # Cambia a tu usuario
-              password="root",      # Cambia a tu contraseña
+              host="localhost",
+              user="root",
+              password="root",
               database="machinelearningdb"
           )
           if conn.is_connected():
