@@ -148,19 +148,25 @@
       - [FreeCodeCamp](#freecodecamp)
       - [ChatGPT](#chatgpt)
       - [SIIM](#siim)
-      - [Documentación numpy](#documentación-numpy)
-      - [Documentación pandas](#documentación-pandas)
-      - [Documentación matplotlib](#documentación-matplotlib)
-      - [Documentación scikit-learn](#documentación-scikit-learn)
-      - [Documentación scipy](#documentación-scipy)
-      - [Documentación nltk](#documentación-nltk)
-      - [Documentación textblob](#documentación-textblob)
-      - [Documentación tensorflow](#documentación-tensorflow)
-      - [Documentación flask](#documentación-flask)
+      - [Documentación BeautifulSoup (bs4)](#documentación-beautifulsoup-bs4)
+      - [Documentación collections](#documentación-collections)
+      - [Documentación Flask](#documentación-flask)
+      - [Documentación Gym](#documentación-gym)
       - [Documentación joblib](#documentación-joblib)
-      - [Documentación collections-extended](#documentación-collections-extended)
       - [Documentación keras API](#documentación-keras-api)
-      - [Documentación mysql-connector](#documentación-mysql-connector)
+      - [Documentación Matplotlib](#documentación-matplotlib)
+      - [Documentación MySQL Connector/Python (mysql.connector)](#documentación-mysql-connectorpython-mysqlconnector)
+      - [Documentación NLTK](#documentación-nltk)
+      - [Documentación NumPy](#documentación-numpy)
+      - [Documentación pandas](#documentación-pandas)
+      - [Documentación Random](#documentación-random)
+      - [Documentación requests](#documentación-requests)
+      - [Documentación SciPy](#documentación-scipy)
+      - [Documentación seaborn](#documentación-seaborn)
+      - [Documentación scikit-learn (sklearn)](#documentación-scikit-learn-sklearn)
+      - [Documentación Surprise](#documentación-surprise)
+      - [Documentación TensorFlow](#documentación-tensorflow)
+      - [Documentación TextBlob](#documentación-textblob)
       - [IMAGENET](#imagenet)
       - [VoxForge](#voxforge)
       - [Google Colab](#google-colab)
@@ -254,6 +260,7 @@ Estas bibliotecas son esenciales para el análisis de datos y la visualización.
 ```bash
 pip install scikit-learn
 pip install scipy
+pip install beautifulsoup4
 ```
 Scikit-learn y SciPy son fundamentales para algoritmos de Machine Learning y operaciones matemáticas.
 
@@ -277,6 +284,7 @@ NLTK y TextBlob son útiles para tareas de procesamiento del lenguaje natural.
 
 ```bash
 pip install tensorflow
+pip install keras
 ```
 
 TensorFlow es una biblioteca poderosa para la creación de modelos de Deep Learning.
@@ -290,6 +298,7 @@ TensorFlow es una biblioteca poderosa para la creación de modelos de Deep Learn
 ```bash
 pip install flask
 pip install joblib
+pip install requests
 ```
 
 Flask es un micro framework web, y joblib es útil para guardar y cargar modelos.
@@ -300,7 +309,10 @@ Flask es un micro framework web, y joblib es útil para guardar y cargar modelos
 ### Otras Bibliotecas Útiles
 
 ```bash
-pip install collections-extended  # Extiende las colecciones integradas en Python
+pip install collections-extended # Extiende las colecciones integradas en Python
+pip install surprise
+pip install mysql-connector-python
+pip install gym
 ```
 
 - [Documentación collections-extended](https://collections-extended.lenzm.net/)
@@ -2335,16 +2347,25 @@ print("Coeficiente R²:", r2)
     <summary>Solución</summary>
 
     ```python
+    import numpy as np
     from sklearn.model_selection import GridSearchCV
     from sklearn.svm import SVC
+    from sklearn.datasets import make_classification
 
-    # Crear el modelo y parámetros
+    # Generar un conjunto de datos sintético
+    X, y = make_classification(n_samples=100, n_features=2, n_informative=2, n_redundant=0, random_state=42)
+
+    # Crear el modelo SVC y definir una cuadrícula de parámetros para la búsqueda
     modelo = SVC()
-    parametros = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
+    parametros = {'kernel': ('linear', 'rbf'), 'C': [1, 10]}
 
-    # Búsqueda de parámetros
+    # Configurar GridSearchCV
     buscador = GridSearchCV(modelo, parametros)
+
+    # Ejecutar la búsqueda de parámetros
     buscador.fit(X, y)
+
+    # Mostrar los mejores parámetros encontrados
     print("Mejores parámetros:", buscador.best_params_)
     ```
 
@@ -2360,12 +2381,27 @@ print("Coeficiente R²:", r2)
     <summary>Solución</summary>
 
     ```python
-    from sklearn.metrics import classification_report, accuracy_score
+    import numpy as np
     from sklearn.model_selection import train_test_split
     from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import classification_report, accuracy_score
+
+    # Generar datos sintéticos
+    n_muestras = 1000
+    n_caracteristicas = 10
+    n_dimensiones = 10
+
+    # Datos tridimensionales aleatorios
+    X = np.random.rand(n_muestras, n_caracteristicas, n_dimensiones)
+
+    # Etiquetas binarias aleatorias
+    y = np.random.randint(0, 2, size=n_muestras)
+
+    # Aplanar X para convertirlo a dos dimensiones
+    X_2d = X.reshape(n_muestras, n_caracteristicas * n_dimensiones)
 
     # Dividir los datos
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(X_2d, y, test_size=0.3)
 
     # Entrenar el modelo
     modelo = RandomForestClassifier()
@@ -2374,7 +2410,7 @@ print("Coeficiente R²:", r2)
 
     # Métricas
     print("Precisión:", accuracy_score(y_test, y_pred))
-    print("Reporte de clasificación:", classification_report(y_test, y_pred))
+    print("Reporte de clasificación:\n", classification_report(y_test, y_pred))
     ```
 
     </details>
@@ -2800,31 +2836,43 @@ print("Coeficiente R²:", r2)
 
 #### [SIIM](https://siim.org/)
 
-#### [Documentación numpy](https://numpy.org/doc/)
+#### [Documentación BeautifulSoup (bs4)](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
-#### [Documentación pandas](https://pandas.pydata.org/docs/)
+#### [Documentación collections](https://docs.python.org/3/library/collections.html)
 
-#### [Documentación matplotlib](https://matplotlib.org/stable/index.html)
+#### [Documentación Flask](https://flask.palletsprojects.com/)
 
-#### [Documentación scikit-learn](https://scikit-learn.org/stable/user_guide.html)
+#### [Documentación Gym](https://www.gymlibrary.dev/content/tutorials/)
 
-#### [Documentación scipy](https://docs.scipy.org/doc/scipy/)
-
-#### [Documentación nltk](https://www.nltk.org/)
-
-#### [Documentación textblob](https://textblob.readthedocs.io/en/dev/)
-
-#### [Documentación tensorflow](https://www.tensorflow.org/api_docs)
-
-#### [Documentación flask](https://flask-es.readthedocs.io/)
-
-#### [Documentación joblib](https://joblib.readthedocs.io/en/stable/)
-
-#### [Documentación collections-extended](https://collections-extended.lenzm.net/)
+#### [Documentación joblib](https://joblib.readthedocs.io/)
 
 #### [Documentación keras API](https://keras.io/)
 
-#### [Documentación mysql-connector](https://dev.mysql.com/doc/connector-python/en/)
+#### [Documentación Matplotlib](https://matplotlib.org/stable/contents.html)
+
+#### [Documentación MySQL Connector/Python (mysql.connector)](https://dev.mysql.com/doc/connector-python/en/)
+
+#### [Documentación NLTK](https://www.nltk.org/)
+
+#### [Documentación NumPy](https://numpy.org/doc/)
+
+#### [Documentación pandas](https://pandas.pydata.org/docs/)
+
+#### [Documentación Random](https://docs.python.org/3/library/random.html)
+
+#### [Documentación requests](https://docs.python-requests.org/en/latest/)
+
+#### [Documentación SciPy](https://docs.scipy.org/doc/scipy/reference/)
+
+#### [Documentación seaborn](https://seaborn.pydata.org/)
+
+#### [Documentación scikit-learn (sklearn)](https://scikit-learn.org/stable/user_guide.html)
+
+#### [Documentación Surprise](https://surprise.readthedocs.io/en/stable/)
+
+#### [Documentación TensorFlow](https://www.tensorflow.org/learn)
+
+#### [Documentación TextBlob](https://textblob.readthedocs.io/)
 
 #### [IMAGENET](https://www.image-net.org/index.php)
 
