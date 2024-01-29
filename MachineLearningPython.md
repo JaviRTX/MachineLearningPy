@@ -16,6 +16,7 @@
       - [**Paso 3: Instalar pip**](#paso-3-instalar-pip)
       - [**Paso 4: Verificar la Instalación de pip**](#paso-4-verificar-la-instalación-de-pip)
       - [**Paso 5: Instalar Paquetes para Machine Learning**](#paso-5-instalar-paquetes-para-machine-learning)
+    - [**Google Colab (Sin Instalación)** Enlace](#google-colab-sin-instalación-enlace)
   - [Instalación de Bibliotecas](#instalación-de-bibliotecas)
     - [Bibliotecas Básicas](#bibliotecas-básicas)
     - [Machine Learning y Procesamiento de Datos](#machine-learning-y-procesamiento-de-datos)
@@ -110,7 +111,6 @@
     - [Despliegue de Modelos de Machine Learning](#despliegue-de-modelos-de-machine-learning)
       - [Introducción al Despliegue de Modelos](#introducción-al-despliegue-de-modelos)
       - [Uso de Flask para APIs de Modelos de ML](#uso-de-flask-para-apis-de-modelos-de-ml)
-        - [Ejemplo de Código en Python para una API Flask:](#ejemplo-de-código-en-python-para-una-api-flask)
       - [Consideraciones de Escalabilidad y Rendimiento](#consideraciones-de-escalabilidad-y-rendimiento)
   - [Parte VII: Estudios de Caso y Proyectos](#parte-vii-estudios-de-caso-y-proyectos)
     - [Proyectos de Machine Learning](#proyectos-de-machine-learning)
@@ -161,8 +161,13 @@
       - [Documentación collections-extended](#documentación-collections-extended)
       - [Documentación keras API](#documentación-keras-api)
       - [Documentación mysql-connector](#documentación-mysql-connector)
+      - [IMAGENET](#imagenet)
+      - [VoxForge](#voxforge)
+      - [Google Colab](#google-colab)
 
 ## **Instalación**
+
+[Tabla de contenidos](#tabla-de-contenidos)
 
 ### Windows
 
@@ -218,6 +223,10 @@
   ```
   pip3 install numpy scipy matplotlib scikit-learn jupyter
   ```
+
+### **Google Colab (Sin Instalación)** [Enlace](https://colab.google/)
+Es necesario crear una cuenta de google.
+
 ## Instalación de Bibliotecas
 
 Puedes instalar las siguientes bibliotecas utilizando pip, el gestor de paquetes de Python. Abre tu terminal o línea de comandos e introduce los siguientes comandos:
@@ -274,6 +283,7 @@ TensorFlow es una biblioteca poderosa para la creación de modelos de Deep Learn
 
 - [Documentación tensorflow](https://www.tensorflow.org/api_docs)
 - [Guía de instalación de TF en caso de errores](https://www.tensorflow.org/install/pip?hl=es#linux)
+- [En caso de no poder instalar TF usar Google Colab](https://colab.research.google.com/)
 
 ### Trabajo con APIs y Web
 
@@ -450,6 +460,7 @@ plt.show()
 ```
 
 ## Parte II: Aprendizaje Supervisado
+
 [Tabla de contenidos](#tabla-de-contenidos)
 
 En el aprendizaje supervisado, los algoritmos aprenden de un conjunto de datos etiquetado, buscando predecir la salida para nuevas entradas basándose en el conocimiento adquirido.
@@ -604,6 +615,7 @@ Ambos, los árboles de decisión y los bosques aleatorios, son herramientas pode
 En esta sección, hemos cubierto tres métodos populares de clasificación en el aprendizaje supervisado, cada uno con su propio enfoque y ventajas. Los ejemplos de código proporcionan una base práctica para implementar estos algoritmos utilizando la biblioteca sklearn de Python, permitiendo una comprensión más profunda de cómo se pueden aplicar en problemas reales de clasificación.
 
 ## Parte III: Aprendizaje No Supervisado
+
 [Tabla de contenidos](#tabla-de-contenidos)
 
 El aprendizaje no supervisado es una técnica de machine learning en la que los modelos se entrenan usando un conjunto de datos sin etiquetas. La idea es explorar la estructura subyacente de los datos para extraer patrones significativos o insights. A diferencia del aprendizaje supervisado, no se utilizan respuestas o etiquetas correctas para guiar el proceso de aprendizaje. El algoritmo intenta organizar los datos de manera que se revelen patrones o características intrínsecas.
@@ -808,6 +820,8 @@ Estas técnicas de reducción de dimensionalidad, PCA y t-SNE, son herramientas 
 
 ## Parte IV: Aprendizaje por Refuerzo
 
+[Tabla de contenidos](#tabla-de-contenidos)
+
 El Aprendizaje por Refuerzo es un enfoque del Machine Learning donde un agente aprende a tomar decisiones para maximizar alguna noción de recompensa acumulativa a través de la interacción con un entorno.
 
 ### Conceptos Básicos de Aprendizaje por Refuerzo
@@ -834,8 +848,8 @@ import numpy as np
 import random
 
 # Suposiciones sobre el entorno y las acciones
-espacio_de_estados = 10  # Ejemplo: 10 estados diferentes
-espacio_de_acciones = 4  # Ejemplo: 4 acciones posibles
+espacio_de_estados = 10  
+espacio_de_acciones = 4  
 
 # Inicializar la tabla Q
 Q = np.zeros([espacio_de_estados, espacio_de_acciones])
@@ -857,8 +871,8 @@ def elegir_accion(estado, Q):
 def tomar_accion(accion):
     # Devuelve un nuevo estado, recompensa y si es el estado final
     nuevo_estado = random.randint(0, espacio_de_estados - 1)
-    recompensa = random.random()  # Ejemplo: recompensa aleatoria
-    final = nuevo_estado == espacio_de_estados - 1  # Ejemplo: condición de finalización
+    recompensa = random.random()  
+    final = nuevo_estado == espacio_de_estados - 1  
     return nuevo_estado, recompensa, final
 
 def actualizar_Q(Q, estado, accion, recompensa, nuevo_estado, alpha, gamma):
@@ -903,6 +917,10 @@ import numpy as np
 import tensorflow as tf
 from collections import deque
 
+# Define el número de estados y acciones según tu entorno
+numero_de_estados = 4  
+numero_de_acciones = 2  
+
 # Definir el modelo de red neuronal para DQN
 modelo = tf.keras.models.Sequential([
     tf.keras.layers.Dense(24, activation='relu', input_shape=(numero_de_estados,)),
@@ -911,22 +929,43 @@ modelo = tf.keras.models.Sequential([
 ])
 
 # Compilar el modelo
-modelo.compile(loss='mse', optimizer=tf.keras.optimizers.Adam(lr=0.001))
+modelo.compile(loss='mse', optimizer=tf.keras.optimizers.Adam(learning_rate=0.001))
 
 # Memory buffer para Experience Replay
 memory_buffer = deque(maxlen=2000)
+
+# Parámetros adicionales
+total_episodios = 100  
+epsilon = 1.0  # Exploración inicial
+epsilon_min = 0.01  # Mínima exploración
+epsilon_decay = 0.995  # Tasa de decaimiento de exploración
+gamma = 0.95  # Factor de descuento
+batch_size = 32  # Tamaño del batch para entrenamiento
+
+# Funciones adicionales
+def resetear_entorno():
+    # Devuelve un estado inicial aleatorio
+    return np.random.rand(numero_de_estados)
+
+def paso_del_entorno(accion):
+    # Devuelve un nuevo estado, recompensa y si es el estado final
+    nuevo_estado = np.random.rand(numero_de_estados)
+    recompensa = np.random.random()
+    final = np.random.choice([True, False])
+    return nuevo_estado, recompensa, final, None
 
 # Proceso de aprendizaje
 for episodio in range(total_episodios):
     estado = resetear_entorno()  # Inicializar el estado del entorno
     final = False
+    recompensa_total = 0  # Para registrar la recompensa total obtenida en el episodio
 
     while not final:
         # Elegir acción con política epsilon-greedy
         if np.random.rand() <= epsilon:
             accion = np.random.choice(numero_de_acciones)
         else:
-            accion = np.argmax(modelo.predict(estado)[0])
+            accion = np.argmax(modelo.predict(estado.reshape(1, -1))[0])
 
         # Tomar acción y observar el resultado
         nuevo_estado, recompensa, final, _ = paso_del_entorno(accion)
@@ -937,27 +976,31 @@ for episodio in range(total_episodios):
         # Entrenar el modelo con un minibatch del memory buffer
         if len(memory_buffer) > batch_size:
             minibatch = random.sample(memory_buffer, batch_size)
-            for estado, accion, recompensa, nuevo_estado, final in minibatch:
-                target = recompensa
-                if not final:
-                    target = (recompensa + gamma * np.max(modelo.predict(nuevo_estado)[0]))
-                target_f = modelo.predict(estado)
-                target_f[0][accion] = target
-                modelo.fit(estado, target_f, epochs=1, verbose=0)
+            for estado_b, accion_b, recompensa_b, nuevo_estado_b, final_b in minibatch:
+                target = recompensa_b
+                if not final_b:
+                    target = (recompensa_b + gamma * np.max(modelo.predict(nuevo_estado_b.reshape(1, -1))[0]))
+                target_f = modelo.predict(estado_b.reshape(1, -1))
+                target_f[0][accion_b] = target
+                modelo.fit(estado_b.reshape(1, -1), target_f, epochs=1, verbose=0)
         
         estado = nuevo_estado  # Actualizar el estado
+        recompensa_total += recompensa  # Acumular la recompensa obtenida
 
-# Parámetros adicionales
-epsilon = 1.0  # Exploración inicial
-epsilon_min = 0.01  # Mínima exploración
-epsilon_decay = 0.995  # Tasa de decaimiento de exploración
-gamma = 0.95  # Factor de descuento
-batch_size = 32  # Tamaño del batch para entrenamiento
+    # Ajustar epsilon
+    if epsilon > epsilon_min:
+        epsilon *= epsilon_decay
+
+    # Imprimir el progreso cada 10 episodios
+    if episodio % 10 == 0:  
+        print(f"Episodio: {episodio}, Recompensa Total: {recompensa_total}, Epsilon: {epsilon}")
 ```
 
 El Aprendizaje por Refuerzo, con técnicas como Q-Learning y DQN, es fundamental para problemas donde la toma de decisiones es secuencial y el entorno puede ser complejo y desconocido.
 
 ## Parte V: Técnicas Avanzadas
+
+[Tabla de contenidos](#tabla-de-contenidos)
 
 El Deep Learning, una subárea del Machine Learning, utiliza redes neuronales con muchas capas (de ahí el término "profundo") para aprender de los datos. Estas técnicas son especialmente potentes en tareas como el procesamiento de imágenes, lenguaje natural y secuencias temporales.
 
@@ -972,6 +1015,11 @@ El Deep Learning, una subárea del Machine Learning, utiliza redes neuronales co
 
 ```python
 import tensorflow as tf
+import numpy as np
+
+# Datos de ejemplo (ficticios)
+datos_entrada = np.random.random((100, 8))  # 100 muestras, 8 características
+datos_salida = np.random.randint(2, size=(100, 1))  # 100 muestras, 1 etiqueta binaria
 
 # Definir un modelo secuencial
 modelo = tf.keras.models.Sequential([
@@ -982,6 +1030,13 @@ modelo = tf.keras.models.Sequential([
 
 # Compilar el modelo
 modelo.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# Entrenar el modelo
+modelo.fit(datos_entrada, datos_salida, epochs=10, batch_size=10)
+
+# Evaluar el modelo
+evaluacion = modelo.evaluate(datos_entrada, datos_salida)
+print(f"Evaluación del modelo: {evaluacion}")
 ```
 #### Redes Neuronales Convolucionales (CNN)
 
@@ -991,6 +1046,16 @@ Las CNN son un tipo de redes neuronales profundas utilizadas principalmente para
 ```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
+import numpy as np
+
+# Supongamos que tenemos datos de entrenamiento y prueba (datos ficticios para este ejemplo)
+x_train = np.random.random((100, 28, 28, 1))  # 100 imágenes, 28x28 píxeles, 1 canal (blanco y negro)
+y_train = np.random.randint(0, 10, (100,))  # 100 etiquetas para las imágenes, 10 clases
+y_train = tf.keras.utils.to_categorical(y_train, num_classes=10)  # Convertir a formato categórico
+
+x_test = np.random.random((20, 28, 28, 1))  # 20 imágenes para prueba
+y_test = np.random.randint(0, 10, (20,))  # 20 etiquetas para las imágenes de prueba
+y_test = tf.keras.utils.to_categorical(y_test, num_classes=10)  # Convertir a formato categórico
 
 # Crear modelo CNN
 modelo_cnn = Sequential()
@@ -1001,6 +1066,13 @@ modelo_cnn.add(Dense(10, activation='softmax'))
 
 # Compilar el modelo
 modelo_cnn.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Entrenar el modelo
+modelo_cnn.fit(x_train, y_train, epochs=5, batch_size=10)
+
+# Evaluar el modelo
+evaluacion = modelo_cnn.evaluate(x_test, y_test)
+print(f"Evaluación del modelo: {evaluacion}")
 ```
 
 #### Redes Neuronales Recurrentes (RNN)
@@ -1010,6 +1082,15 @@ Las RNN son utilizadas para trabajar con secuencias de datos, como el lenguaje h
 ```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, SimpleRNN
+import numpy as np
+
+# Datos ficticios de ejemplo
+# Supongamos que tenemos 100 secuencias de 3 pasos de tiempo con 1 característica
+x_train = np.random.random((100, 3, 1))
+y_train = np.random.random((100, 1))
+
+x_test = np.random.random((20, 3, 1))
+y_test = np.random.random((20, 1))
 
 # Crear modelo RNN
 modelo_rnn = Sequential()
@@ -1019,6 +1100,13 @@ modelo_rnn.add(Dense(1))
 
 # Compilar el modelo
 modelo_rnn.compile(optimizer='adam', loss='mean_squared_error')
+
+# Entrenar el modelo
+modelo_rnn.fit(x_train, y_train, epochs=10, batch_size=10)
+
+# Evaluar el modelo
+evaluacion = modelo_rnn.evaluate(x_test, y_test)
+print(f"Evaluación del modelo: {evaluacion}")
 ```
 
 Estas técnicas avanzadas de Deep Learning permiten a los modelos aprender y realizar tareas que serían imposibles o muy difíciles para los algoritmos de Machine Learning tradicionales.
@@ -1062,23 +1150,34 @@ X = vectorizador.fit_transform(textos)
 # Aplicar LDA
 lda = LatentDirichletAllocation(n_components=3, random_state=0)
 lda.fit(X)
+
+# Mostrar los temas
+palabras = vectorizador.get_feature_names_out()
+
+# Mostrar las 5 palabras más relevantes por tema
+for indice_tema, tema in enumerate(lda.components_):
+    print(f"Tema {indice_tema}:")
+    print(" ".join([palabras[i] for i in tema.argsort()[:-4:-1]]))  
 ```
 
 #### Análisis de Sentimientos
 El análisis de sentimientos es una técnica de NLP utilizada para determinar la actitud o emoción del hablante o escritor respecto a un tema particular.
 ```python
 from textblob import TextBlob
-
-texto = "Python es un excelente lenguaje de programación."
+# Solo funciona con texto en inglés
+texto = "I love Python, it is the best thing"
 blob = TextBlob(texto)
 
 # Obtener el sentimiento del texto
 sentimiento = blob.sentiment.polarity
 print("Sentimiento:", sentimiento)
 ```
+
 El NLP es un campo de rápido crecimiento en la ciencia de datos y la inteligencia artificial, y Python ofrece un ecosistema robusto y versátil para su exploración y aplicación práctica.
 
 ## Parte VI: Herramientas y Mejores Prácticas
+
+[Tabla de contenidos](#tabla-de-contenidos)
 
 Esta sección aborda herramientas y estrategias fundamentales para la evaluación y optimización de modelos de Machine Learning, asegurando su efectividad y confiabilidad.
 
@@ -1115,6 +1214,12 @@ El ajuste de hiperparámetros implica encontrar la combinación de parámetros q
 ```python
 from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
+import numpy as np
+
+# Datos ficticios aleatorios
+# X: datos de entrada, y: etiquetas 
+X = np.random.rand(100, 5)  # 100 muestras, 5 características por muestra
+y = np.random.randint(2, size=100)  # 100 etiquetas binarias
 
 # Parámetros a ajustar
 parametros = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
@@ -1125,6 +1230,8 @@ svc = SVC()
 # Ajuste de hiperparámetros
 clf = GridSearchCV(svc, parametros)
 clf.fit(X, y)
+
+# Imprimir los mejores parámetros encontrados
 print("Mejores parámetros:", clf.best_params_)
 ```
 
@@ -1136,8 +1243,17 @@ Las métricas de evaluación son cruciales para entender el rendimiento de un mo
 - Recall: Capacidad del modelo para encontrar todas las instancias relevantes.
 - F1-Score: Media armónica de la precisión y el recall.
 ```python
+import numpy as np
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
+
+# Datos ficticios aleatorios
+X = np.random.rand(100, 5)  # 100 muestras, 5 características por muestra
+y = np.random.randint(2, size=100)  # 100 etiquetas binarias
+
+# Dividir los datos en conjuntos de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 80% entrenamiento 20% prueba
 
 # Entrenar y predecir con un modelo
 modelo = RandomForestClassifier()
@@ -1163,32 +1279,13 @@ El despliegue de un modelo implica integrarlo en una aplicación existente o en 
 
 Flask es un micro framework web en Python que es frecuentemente utilizado para crear APIs que permiten interactuar con modelos de ML. A través de Flask, se puede exponer un modelo como un servicio web que puede recibir datos y devolver predicciones.
 
-##### Ejemplo de Código en Python para una API Flask:
-
-```python
-from flask import Flask, request, jsonify
-import joblib
-
-# Cargar modelo entrenado
-modelo = joblib.load('modelo_entrenado.pkl')
-
-app = Flask(__name__)
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    data = request.get_json()
-    prediccion = modelo.predict([data['entrada']])
-    return jsonify({'prediccion': prediccion.tolist()})
-
-if __name__ == '__main__':
-    app.run(debug=True)
-```
-
 #### Consideraciones de Escalabilidad y Rendimiento
 
 Al desplegar modelos de ML, es crucial considerar su escalabilidad y rendimiento. Esto implica asegurar que el modelo pueda manejar una gran cantidad de solicitudes sin degradar su velocidad o precisión. Se deben considerar aspectos como la optimización del modelo, el uso eficiente de recursos y la posibilidad de escalar horizontalmente. El despliegue efectivo de modelos de ML es un paso crucial para llevar las soluciones de Machine Learning desde el laboratorio hasta aplicaciones del mundo real, impactando directamente en usuarios y negocios.
 
 ## Parte VII: Estudios de Caso y Proyectos
+
+[Tabla de contenidos](#tabla-de-contenidos)
 
 Esta sección se centra en la aplicación práctica de las técnicas de Machine Learning en diversos escenarios y proyectos.
 
@@ -1201,16 +1298,26 @@ La detección de fraude es un campo crucial en el sector financiero, donde el Ma
 ##### Ejemplo de Código en Python para Detección de Fraude:
 
 ```python
+from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
-# Supongamos que X son las características de las transacciones y y es si es fraude o no
-# X, y = cargar_datos()
+# Cargar el conjunto de datos Iris
+iris = load_iris()
+X, y = iris.data, iris.target
 
-modelo_fraude = RandomForestClassifier()
-modelo_fraude.fit(X, y)
+# Dividir los datos en conjuntos de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Predecir si una nueva transacción es fraudulenta
-# prediccion_fraude = modelo_fraude.predict(nueva_transaccion)
+# Crear y entrenar el modelo
+modelo = RandomForestClassifier(n_estimators=100, random_state=42)
+modelo.fit(X_train, y_train)
+
+# Hacer predicciones con el conjunto de prueba
+predicciones = modelo.predict(X_test)
+
+# Mostrar las primeras 5 predicciones
+print("Primeras 5 predicciones:", predicciones[:5])
 ```
 
 #### Recomendaciones de Productos
@@ -1220,16 +1327,33 @@ Los sistemas de recomendación utilizan el aprendizaje automático para sugerir 
 ##### Ejemplo de Código en Python para Recomendaciones de Productos:
 
 ```python
-from sklearn.decomposition import TruncatedSVD
+from sklearn.neighbors import NearestNeighbors
+import numpy as np
 
-# Matriz de calificación de usuario-producto
-# matriz_calificaciones = cargar_datos()
+# Datos ficticios de tarjetas gráficas NVIDIA
+# Columnas: Memoria (GB), Velocidad del Reloj Base (MHz), Núcleos CUDA, Ancho de Banda de Memoria (GB/s), TDP (Consumo en Vatios)
+tarjetas_graficas = np.array([
+    [8, 1500, 2304, 448, 180],   # GTX 1080
+    [11, 1350, 3584, 616, 250],  # RTX 2080 Ti
+    [24, 1400, 10496, 936, 350], # RTX 3090
+    [10, 1607, 2944, 484, 215],  # GTX 1080 Ti
+    [8, 1410, 2176, 448, 175]    # RTX 2060
+])
 
-svd = TruncatedSVD(n_components=50)
-matriz_reducida = svd.fit_transform(matriz_calificaciones)
+# Nombres de las tarjetas gráficas para referencia
+nombres_tarjetas = ['GTX 1080', 'RTX 2080 Ti', 'RTX 3090', 'GTX 1080 Ti', 'RTX 2060']
 
-# Generar recomendaciones basadas en la matriz reducida
-# recomendaciones = generar_recomendaciones(usuario, matriz_reducida)
+# Preferencias del usuario (ejemplo): [Memoria, Velocidad del Reloj, Núcleos CUDA, Ancho de Banda, TDP]
+preferencias_usuario = np.array([[10, 1500, 3000, 500, 200]])
+
+# Utilizar Nearest Neighbors para encontrar la mejor opción
+modelo_nn = NearestNeighbors(n_neighbors=1)
+modelo_nn.fit(tarjetas_graficas)
+distancia, indice = modelo_nn.kneighbors(preferencias_usuario)
+
+# Recomendar una tarjeta gráfica
+tarjeta_recomendada = nombres_tarjetas[indice[0][0]]
+print(f"La tarjeta grafica recomendada es: {tarjeta_recomendada}")
 ```
 
 #### Reconocimiento de Imágenes y Voz
@@ -1239,41 +1363,66 @@ El reconocimiento de imágenes y voz son aplicaciones populares del Machine Lear
 ##### Ejemplo de Código en Python para Reconocimiento de Imágenes:
 
 ```python
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input, decode_predictions
+from tensorflow.keras.preprocessing import image
 
-# Modelo de CNN para reconocimiento de imágenes
-modelo_imagenes = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)),
-    MaxPooling2D((2, 2)),
-    Flatten(),
-    Dense(64, activation='relu'),
-    Dense(1, activation='sigmoid')
-])
+# Cargar el modelo MobileNetV2 preentrenado
+modelo = MobileNetV2(weights='imagenet')
 
-modelo_imagenes.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+def predecir_imagen(ruta_imagen):
+    # Cargar y preprocesar la imagen
+    img = image.load_img(ruta_imagen, target_size=(224, 224))
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array = preprocess_input(img_array)
 
-# Entrenar el modelo con imágenes
-# modelo_imagenes.fit(imagenes_entrenamiento, etiquetas_entrenamiento)
+    # Hacer la predicción
+    prediccion = modelo.predict(img_array)
+
+    # Decodificar las predicciones
+    decoded = decode_predictions(prediccion, top=1)[0][0]
+    return decoded
+
+# Probar la función con una nueva imagen
+ruta_imagen = '/content/malik-color1.jpg'  # Cambiar imagen
+resultado = predecir_imagen(ruta_imagen)
+print(f"Predicción: {resultado[1]}, Probabilidad: {resultado[2]}")
 ```
 
 ##### Ejemplo de Código en Python para Reconocimiento de Voz:
 
 ```python
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
+import requests
+from bs4 import BeautifulSoup
 
-# Modelo de RNN para reconocimiento de voz
-modelo_voz = Sequential([
-    LSTM(128, return_sequences=True, input_shape=(timesteps, features)),
-    LSTM(128),
-    Dense(10, activation='softmax')
-])
+def descargar_archivo(url, ruta_destino):
+    respuesta = requests.get(url, stream=True)
+    with open(ruta_destino, 'wb') as archivo:
+        for chunk in respuesta.iter_content(chunk_size=128):
+            archivo.write(chunk)
 
-modelo_voz.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+def obtener_enlaces_descarga(url_base):
+    pagina = requests.get(url_base)
+    soup = BeautifulSoup(pagina.content, 'html.parser')
+    
+    # Aquí deberías analizar la página para encontrar los enlaces de descarga
+    # Esto dependerá de la estructura HTML del sitio web de VoxForge
+    enlaces = []
+    return enlaces
 
-# Entrenar el modelo con grabaciones de voz
-# modelo_voz.fit(voz_entrenamiento, etiquetas_entrenamiento)
+# Conjuntos de datos demasiado grandes
+url_base = 'https://repository.voxforge1.org/downloads/es/Trunk/Audio/Original/48kHz_16bit/CarlosEspinoAngulo-20140525-vip.tgz'
+
+# Obtener enlaces de descarga
+enlaces = obtener_enlaces_descarga(url_base)
+
+# Descargar cada archivo
+for enlace in enlaces:
+    descargar_archivo(enlace, 'C:/laragon/www/python/test.m4a')
+
+# Debido al tamaño del conjunto de datos, este código es solo un ejemplo y no ha sido probado.
 ```
 
 Estos ejemplos de proyectos de Machine Learning ilustran cómo las diversas técnicas pueden ser aplicadas para resolver problemas reales en diferentes dominios.
@@ -1315,6 +1464,11 @@ Es importante estar informado sobre las leyes y regulaciones aplicables, especia
 Estas consideraciones éticas y legales son fundamentales para garantizar que el desarrollo y aplicación del Machine Learning sean responsables y sostenibles.
 
 ## Ejercicios
+
+[Tabla de contenidos](#tabla-de-contenidos)
+
+[Para facilitar la realización de los ejercicios, se recomienda usar Google Colab, debido a cualquier error que pueda surgir con librerias o tensorflow](https://colab.google/)
+
 ### Parte I: Fundamentos
 
 **Introducción al Machine Learning**
@@ -1402,7 +1556,7 @@ Estas consideraciones éticas y legales son fundamentales para garantizar que el
 
 - Aprendizaje por Refuerzo
 
-  **Ejercicio 5:** Investiga un entorno simple de OpenAI Gym y escribe un código en Python que inicie el entorno e imprima su estado inicial.
+  **Ejercicio 5:** Investiga un entorno simple de OpenAI Gym y escribe un código en Python que inicie el entorno e imprima su estado inicial. (Pista: pip install gym)
 
   <details>
   <summary>Solución</summary>
@@ -1496,7 +1650,7 @@ Estas consideraciones éticas y legales son fundamentales para garantizar que el
   x = np.random.rand(50)
   y = np.random.rand(50)
 
-  sns.scatterplot(x, y)
+  sns.scatterplot(x=x, y=y)
   plt.show()
   ```
 
@@ -1592,9 +1746,21 @@ print("Coeficiente R²:", r2)
     <summary>Solución</summary>
 
     ```python
+    from sklearn import datasets
     from sklearn.svm import SVC
+    from sklearn.metrics import accuracy_score
+    from sklearn.model_selection import train_test_split
 
-    # Entrenar el modelo SVM
+    # Cargar el conjunto de datos Iris
+    iris = datasets.load_iris()
+    X = iris.data
+    y = iris.target
+
+    # Dividir los datos en conjuntos de entrenamiento y prueba
+    # Esto se debe hacer solo si no se ha hecho en el ejercicio anterior
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Crear y entrenar el modelo SVM
     modelo_svm = SVC()
     modelo_svm.fit(X_train, y_train)
 
@@ -1617,7 +1783,18 @@ print("Coeficiente R²:", r2)
       <summary>Solución</summary>
 
       ```python
+      from sklearn import datasets
+      from sklearn.model_selection import train_test_split
       from sklearn.tree import DecisionTreeClassifier
+      from sklearn.metrics import accuracy_score
+
+      # Cargar el conjunto de datos Iris
+      iris = datasets.load_iris()
+      X = iris.data
+      y = iris.target
+
+      # Dividir los datos en conjuntos de entrenamiento y prueba
+      X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
       # Entrenar el modelo de árbol de decisión
       modelo_arbol = DecisionTreeClassifier()
@@ -1641,7 +1818,18 @@ print("Coeficiente R²:", r2)
       <summary>Solución</summary>
 
       ```python
+      from sklearn import datasets
+      from sklearn.model_selection import train_test_split
       from sklearn.ensemble import RandomForestClassifier
+      from sklearn.metrics import accuracy_score
+
+      # Cargar el conjunto de datos Iris
+      iris = datasets.load_iris()
+      X = iris.data
+      y = iris.target
+
+      # Dividir los datos en conjuntos de entrenamiento y prueba
+      X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
       # Entrenar el modelo de bosque aleatorio
       modelo_bosque = RandomForestClassifier()
@@ -1738,13 +1926,32 @@ print("Coeficiente R²:", r2)
     <summary>Solución</summary>
 
     ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
     from sklearn.cluster import DBSCAN
+    from sklearn.datasets import make_blobs
 
-    # DBSCAN
-    dbscan = DBSCAN(eps=0.1, min_samples=5)
-    clusters = dbscan.fit_predict(X)
+    # Generar datos de ejemplo
+    X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
 
-    plt.scatter(X[:, 0], X[:, 1], c=clusters, cmap='viridis')
+    # Valores de 'eps' y 'min_samples' para probar
+    valores_eps = [0.1, 0.3, 0.5, 0.7]
+    valores_min_samples = [5, 10, 15]
+
+    # Crear subplots
+    fig, axs = plt.subplots(len(valores_eps), len(valores_min_samples), figsize=(15, 10))
+
+    # Aplicar DBSCAN con diferentes valores de 'eps' y 'min_samples'
+    for i, eps in enumerate(valores_eps):
+        for j, min_samples in enumerate(valores_min_samples):
+            dbscan = DBSCAN(eps=eps, min_samples=min_samples)
+            clusters = dbscan.fit_predict(X)
+            axs[i, j].scatter(X[:, 0], X[:, 1], c=clusters, cmap='viridis')
+            axs[i, j].set_title(f'eps={eps}, min_samples={min_samples}')
+            axs[i, j].set_xticks([])
+            axs[i, j].set_yticks([])
+
+    plt.tight_layout()
     plt.show()
     ```
 
@@ -1766,14 +1973,21 @@ print("Coeficiente R²:", r2)
     ```python
     from sklearn.decomposition import PCA
     import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
 
-    # PCA
+    # Cargar el conjunto de datos Iris
+    iris = load_iris()
+    X = iris.data
+
+    # Aplicar PCA
     pca = PCA(n_components=2)
     X_pca = pca.fit_transform(X)
 
+    # Visualizar los resultados
     plt.scatter(X_pca[:, 0], X_pca[:, 1])
     plt.xlabel('Componente Principal 1')
     plt.ylabel('Componente Principal 2')
+    plt.title('PCA del Conjunto de Datos Iris')
     plt.show()
     ```
 
@@ -1790,14 +2004,22 @@ print("Coeficiente R²:", r2)
 
     ```python
     from sklearn.manifold import TSNE
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
 
-    # t-SNE
+    # Cargar el conjunto de datos Iris
+    iris = load_iris()
+    X = iris.data
+
+    # Aplicar t-SNE
     tsne = TSNE(n_components=2, perplexity=30)
     X_tsne = tsne.fit_transform(X)
 
-    plt.scatter(X_tsne[:, 0], X_tsne[:, 1])
+    # Visualizar los resultados
+    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=iris.target)
     plt.xlabel('t-SNE feature 1')
     plt.ylabel('t-SNE feature 2')
+    plt.title('t-SNE del Conjunto de Datos Iris')
     plt.show()
     ```
 
@@ -1839,8 +2061,10 @@ print("Coeficiente R²:", r2)
       n_intentos[accion] += 1
       q_estimados[accion] += (recompensa - q_estimados[accion]) / n_intentos[accion]
       recompensas.append(recompensa)
-
+  mejor_brazo = np.argmax(q_estimados)
   print("Recompensas acumuladas:", np.sum(recompensas))
+  print("Mejor brazo:", mejor_brazo)
+  print("Estimación de recompensa del mejor brazo:", q_estimados[mejor_brazo])
   ```
 
   </details>
@@ -1862,7 +2086,7 @@ print("Coeficiente R²:", r2)
 
   - **Ejemplo de Código en Python:**
 
-    **Ejercicio 3:** Implementa un algoritmo básico de Q-learning en Python para resolver un entorno simple de OpenAI Gym, como 'FrozenLake-v0'.
+    **Ejercicio 3:** Implementa un algoritmo básico de Q-learning en Python para resolver un entorno simple de OpenAI Gym, como 'FrozenLake-v1'.
 
     <details>
     <summary>Solución</summary>
@@ -1871,7 +2095,7 @@ print("Coeficiente R²:", r2)
     import gym
     import numpy as np
 
-    env = gym.make('FrozenLake-v0')
+    env = gym.make('FrozenLake-v1')
     n_estados = env.observation_space.n
     n_acciones = env.action_space.n
 
@@ -2060,14 +2284,13 @@ print("Coeficiente R²:", r2)
     from nltk.tokenize import word_tokenize
 
     nltk.download('punkt')
-    texto = "Hello! This is an example of tokenization."
+    texto = "Me alegra mucho programar en Python"
 
     tokens = word_tokenize(texto)
     print("Tokens:", tokens)
     ```
 
     </details>
-
 
 ### Parte VI: Herramientas y Mejores Prácticas
 
@@ -2156,63 +2379,6 @@ print("Coeficiente R²:", r2)
 
     </details>
 
-**Despliegue de Modelos de Machine Learning**
-
-- **Introducción al Despliegue de Modelos**
-
-- **Uso de Flask para APIs de Modelos de ML**
-
-  - **Ejemplo de Código en Python para una API Flask:**
-
-    **Ejercicio 4:** Crea una API simple con Flask para servir predicciones de un modelo de Machine Learning.
-
-    <details>
-    <summary>Solución</summary>
-    
-    Entrenamiento del modelo:
-
-    ```python
-    from sklearn.datasets import load_iris
-    from sklearn.ensemble import RandomForestClassifier
-    import pickle
-
-    # Cargar el conjunto de datos Iris
-    iris = load_iris()
-    X, y = iris.data, iris.target
-
-    # Crear y entrenar el modelo de RandomForest
-    modelo = RandomForestClassifier()
-    modelo.fit(X, y)
-
-    # Guardar el modelo entrenado
-    with open('modelo_iris.pkl', 'wb') as file:
-        pickle.dump(modelo, file)
-    ```
-
-    Aplicación Flask para hacer predicciones:
-
-    ```python
-    from flask import Flask, request, jsonify
-    import pickle
-
-    # Cargar modelo (ejemplo con un archivo 'modelo.pkl')
-    modelo = pickle.load(open('modelo.pkl', 'rb'))
-
-    app = Flask(__name__)
-
-    @app.route('/predict', methods=['POST'])
-    def predict():
-        datos = request.json
-        prediccion = modelo.predict([datos['features']])
-        return jsonify({'prediccion': prediccion[0]})
-
-    if __name__ == '__main__':
-        app.run(debug=True)
-    ```
-
-    </details>
-
-
 ### Parte VII: Estudios de Caso y Proyectos
 
 **Proyectos de Machine Learning**
@@ -2221,13 +2387,14 @@ print("Coeficiente R²:", r2)
 
   - **Ejemplo de Código en Python para Detección de Fraude:**
 
-    **Ejercicio 1:** Implementa un modelo básico para detectar transacciones fraudulentas en un conjunto de datos financiero.
+    **Ejercicio 1:** Implementa un modelo básico para detectar transacciones fraudulentas en un conjunto de datos financiero 
+    (Este ejercicio es conceptual, requiere de un .csv)
 
     <details>
     <summary>Solución</summary>
 
     ```python
-    # Este es un ejercicio simplificado y no utiliza un conjunto de datos real.
+    # Este ejercicio es conceptual, requiere de un .csv
 
     from sklearn.ensemble import RandomForestClassifier
     from sklearn.model_selection import train_test_split
@@ -2262,7 +2429,7 @@ print("Coeficiente R²:", r2)
     <summary>Solución</summary>
 
     ```python
-    # Este es un ejercicio conceptual.
+    # Ejercicio conceptual.
 
     # Importar bibliotecas necesarias
     from surprise import Dataset, Reader, KNNBasic
@@ -2358,11 +2525,14 @@ print("Coeficiente R²:", r2)
 
     # Entrenar el modelo con datos sintéticos
     modelo_rnn.fit(X, y, epochs=5, batch_size=32)
+    print("Para que el modelo aprenda, se deberian de utilizar datos no aleatorios")
     ```
 
     </details>
 
 ## Sistema CRUD para Machine Learning en Python con MySQL
+
+[Tabla de contenidos](#tabla-de-contenidos)
 
 ### Paso 1: Configurar el Entorno
 
@@ -2400,6 +2570,46 @@ print("Coeficiente R²:", r2)
   INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Jorge', 27, 33000);
   INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Carmen', 36, 49000);
   INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Óscar', 42, 56000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('María', 31, 41000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('José', 32, 42000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Sara', 33, 43000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Luis', 34, 44000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Daniel', 35, 45000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Carolina', 36, 46000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Miguel', 37, 47000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Isabel', 38, 48000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Pablo', 39, 49000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Lucas', 40, 50000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Eva', 41, 51000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Cristian', 42, 52000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Lorena', 43, 53000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Andrés', 44, 54000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Clara', 45, 55000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Hugo', 46, 56000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Valentina', 47, 57000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Javier', 48, 58000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Adriana', 49, 59000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Roberto', 50, 60000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Marina', 31, 41000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Antonio', 32, 42000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Ana', 33, 43000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Pedro', 34, 44000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Laura', 35, 45000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Fernando', 36, 46000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Rosa', 37, 47000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Alejandro', 38, 48000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Natalia', 39, 49000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Santiago', 40, 50000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Marcela', 41, 51000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Víctor', 42, 52000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Camila', 43, 53000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Gustavo', 44, 54000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Isabella', 45, 55000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Raúl', 46, 56000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Paula', 47, 57000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Felipe', 48, 58000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Catalina', 49, 59000);
+  INSERT INTO clientes (nombre, edad, ingresos) VALUES ('Joaquín', 50, 60000);
   ```
 
 - Instale las bibliotecas necesarias en Python: `mysql-connector-python`, `numpy`, `pandas` y `scikit-learn`.
@@ -2574,6 +2784,8 @@ print("Coeficiente R²:", r2)
 
 ## Bibliografía
 
+[Tabla de contenidos](#tabla-de-contenidos)
+
 #### [Kaggle](https://www.kaggle.com/learn)
 
 #### [W3Schools](https://www.w3schools.com/python/python_ml_getting_started.asp)
@@ -2613,3 +2825,9 @@ print("Coeficiente R²:", r2)
 #### [Documentación keras API](https://keras.io/)
 
 #### [Documentación mysql-connector](https://dev.mysql.com/doc/connector-python/en/)
+
+#### [IMAGENET](https://www.image-net.org/index.php)
+
+#### [VoxForge](https://www.voxforge.org/)
+
+#### [Google Colab](https://colab.google/)
